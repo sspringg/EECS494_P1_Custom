@@ -58,7 +58,7 @@ public class Pokemon_Menu_2 : MonoBehaviour {
 					print("cancel");
 					gameObject.SetActive(false);
 					Pokemon_Menu.S.Pokemon_Menu_paused = false;
-					gameObject.SetActive(false);
+					Pokemon_Menu.S.pokemon_menu_2_active = false;
 					break;	
 				}
 			}

@@ -7,6 +7,11 @@ public class TurnActionViewer : MonoBehaviour {
 	public string[] endText;
 	public string printText;
 	public int lim;
+	public string activeDied;
+	public bool allDied;
+	public bool run;
+	public bool pokecaught;
+	public double diffmod;
 
 	void Awake () {
 		S = this;
@@ -17,6 +22,11 @@ public class TurnActionViewer : MonoBehaviour {
 		gameObject.SetActive (false);
 		printText = "";
 		lim = 0;
+		activeDied = "";
+		allDied = false;
+		run = false;
+		pokecaught = false;
+		diffmod = 1;
 		endText = new string[8];
 		for (int i = 0; i < 8; ++i) {
 			endText [i] = "";
@@ -28,6 +38,7 @@ public class TurnActionViewer : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A)) {
 			gameObject.SetActive (false);
 			if (BattleScreen.opponentPokemon.curHp <= 0) {
+				if (activeDied != "") endText[lim++] = activeDied + " has fainted.";
 				int x, y;
 				printText = "";
 				endText[lim++] = BattleScreen.opponentPokemon.pkmnName + " has fainted.";
@@ -56,6 +67,51 @@ public class TurnActionViewer : MonoBehaviour {
 				AttackMenu.S.gameObject.SetActive (false);
 				AttackMoveView.S.gameObject.SetActive (false);
 				EndTextViewer.S.gameObject.SetActive(true);
+			}
+			else if (allDied){
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				FaintedViewer.S.gameObject.SetActive(true);
+				FaintedViewer.printMessage("All your Pokemon have fainted,\nyou will be transfered to the \nnearest Pokemon center.");
+			}
+			else if (activeDied != ""){
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				FaintedViewer.S.gameObject.SetActive(true);
+				FaintedViewer.printMessage(activeDied + " has fainted, switching to next Pokemon.");
+				diffmod = 1;
+			}
+			else if (run || pokecaught) {
+				BattleScreen.DestroyHelper();
+			}
+			else if (diffmod != 1 && diffmod != 11) {
+				print ("cur diffmod : " + diffmod.ToString());
+				AttackMenu.S.gameObject.SetActive (false);
+				AttackMoveView.S.gameObject.SetActive (false);
+				FaintedViewer.S.gameObject.SetActive(true);
+				if (diffmod < 10){
+					if (diffmod == 0){
+						FaintedViewer.printMessage(BattleScreen.opponentPokemon.pkmnName + "'s attack had no effect");
+					}
+					else if (diffmod == 0.5){
+						FaintedViewer.printMessage(BattleScreen.opponentPokemon.pkmnName + "'s attack was not very effective");
+					}
+					else{
+						FaintedViewer.printMessage(BattleScreen.opponentPokemon.pkmnName + "'s attack was super effective");
+					}
+				}
+				else {
+					if (diffmod == 10){
+						FaintedViewer.printMessage(BattleScreen.playerPokemon.pkmnName + "'s attack had no effect");
+					}
+					else if (diffmod == 10.5){
+						FaintedViewer.printMessage(BattleScreen.playerPokemon.pkmnName + "'s attack was not very effective");
+					}
+					else{
+						FaintedViewer.printMessage(BattleScreen.playerPokemon.pkmnName + "'s attack was super effective");
+					}
+				}
+				diffmod = 1;
 			}
 			else {
 				BottomMenu.S.gameObject.SetActive (true);

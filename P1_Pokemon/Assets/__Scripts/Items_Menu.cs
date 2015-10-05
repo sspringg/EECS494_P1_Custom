@@ -38,15 +38,15 @@ public class Items_Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Menu.S.menuPaused && !Items_Menu_2_active){
+		if (!Items_Menu_2_active && !Pokemon_Menu.S.bad_choice){ //Menu.S.menuPaused &&
 			setPlayerItems();
 			if(Input.GetKeyDown(KeyCode.A)){
-				if(activeItem == 5){
+				if(activeItem == 5 && !Main.S.choiceMade){		//added choiceMade so cant cancel in turn
 					gameObject.SetActive(false);
 					Menu.S.menuPaused = false;
 					Menu.S.items_menu_active = false;
 				}
-				else{
+				else if(Main.S.inTurn && activeItem != 5){
 					itemChosen = ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Substring(0, ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Length - 4);
 					Items_Menu_2.S.gameObject.SetActive(true);
 					Items_Menu_2_active = true;

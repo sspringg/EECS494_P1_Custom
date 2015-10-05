@@ -78,7 +78,7 @@ public class Menu : MonoBehaviour {
 						break;
 					case(int)menuItem.exit:
 						gameObject.SetActive(false);
-						Main.S.paused = false;
+						Turn_Choice_Menu.S.pause_turn_menu = false;
 						break;
 				
 				}

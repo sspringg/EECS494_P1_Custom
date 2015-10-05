@@ -60,12 +60,28 @@ public class BottomMenu : MonoBehaviour {
 				break;
 			case(int)bMenuItem.item:
 				print("Item selected");
+				gameObject.SetActive(false);
+				BattleScreen.S.gameObject.SetActive(false);
+				BattleItemMenu.S.gameObject.SetActive(true);
+				BattleItemMenu.UpdateItemMenu();
 				break;
 			case(int)bMenuItem.run:
 				print("Run selected");
-				if (Player.S.enemyNo > 3)
-					;//initiate run and display message
-				else ;//display message that you can't run from a trainer
+				BottomMenu.S.gameObject.SetActive(false);
+				TurnActionViewer.S.gameObject.SetActive(true);
+				if (Player.S.enemyNo > 3){
+					if (UnityEngine.Random.Range(0, 10) > 4){
+						TurnActionViewer.S.run = true;
+						TurnActionViewer.printMessage("Ran away successfully!");
+					}
+					else {
+						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
+						TurnActionViewer.printMessage("Failed to run!" + "\n\n" + BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName);
+					}
+				}
+				else {
+						TurnActionViewer.printMessage("Cannot run away from a trainer.");
+				}
 				break;
 			}
 		}

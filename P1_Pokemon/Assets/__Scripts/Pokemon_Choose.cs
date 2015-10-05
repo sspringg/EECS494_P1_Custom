@@ -56,6 +56,7 @@ public class Pokemon_Choose : MonoBehaviour {
 					break;	
 				}
 				Player.S.pokemon_list[1] = PokemonObject.getPokemon("Pikachu");
+				Player.S.pokemon_list[1].curHp -= 11;
 				gameObject.SetActive(false);
 				Main.S.paused = false;
 				Dialog.S.HideDialogBox();

@@ -45,6 +45,14 @@ public class AttackMove{
 			atkmv.curPp = 20;
 			atkmv.type = pkmnType.bug;
 			break;
+		case "Gust":
+			atkmv.moveName = "Gust";
+			atkmv.pwr = 40;
+			atkmv.acurcy = 100;
+			atkmv.totPp = 20;
+			atkmv.curPp = 20;
+			atkmv.type = pkmnType.flying;
+			break;
 		default:
 			atkmv.moveName = "None";
 			atkmv.pwr = 0;

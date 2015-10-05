@@ -37,18 +37,18 @@ public class Items_Menu_2 : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem){ // at 1:14:00
 					case 0:
-						Menu.S.pokemon_menu_active = true;
-						Pokemon_Menu.S.gameObject.SetActive(true);
 						Dialog.S.gameObject.SetActive(true);
 						Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 						noAlpha.a = 255;
 						GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
+						print("length " + Player.S.pokemon_list.Count);
+						Pokemon_Menu.S.gameObject.SetActive(true);
 						Dialog.S.ShowMessage("Use on which POKeMON?");
+						usingItem = true;
 						Items_Menu.S.Items_Menu_2_active = false;
 						Items_Menu.S.items_menu_paused = false;
 						Items_Menu.S.gameObject.SetActive(false);
 						gameObject.SetActive(false);
-						usingItem = true;
 						break;
 					case 1:
 						if(Items_Menu.S.itemChosen != "Prof_Oak_Package"){
@@ -56,12 +56,11 @@ public class Items_Menu_2 : MonoBehaviour {
 							if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0){
 								Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them
 							}
-							Items_Menu.S.items_menu_paused = false;
-							Items_Menu.S.Items_Menu_2_active = false;
 							Items_Menu.S.ItemMenu_lists[Items_Menu.S.ItemMenu_lists.Count - 1].GetComponent<GUIText>().color = Color.red; 
-							gameObject.SetActive(false);
 						}
-					
+						Items_Menu.S.items_menu_paused = false;
+						Items_Menu.S.Items_Menu_2_active = false;
+						gameObject.SetActive(false);
 						break;	
 					}
 			}

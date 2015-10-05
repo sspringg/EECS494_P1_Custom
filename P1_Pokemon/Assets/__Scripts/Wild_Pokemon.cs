@@ -9,12 +9,15 @@ public class Wild_Pokemon : MonoBehaviour {
 	public UnityEngine.Random random = new UnityEngine.Random();
 	void OnTriggerEnter(Collider coll){
 		randomVal = UnityEngine.Random.Range(0, 100);
-		if(randomVal < chanceToFight)
-			Application.LoadLevelAdditive("_Scene_2");
+		if (randomVal < chanceToFight) {
+			Player.S.inScene0 = false;
+			Application.LoadLevelAdditive ("_Scene_2");
+			Player.S.enemyNo = UnityEngine.Random.Range(4, 6);
+		}
 	}
 	void FixedUpdate(){
 			randomVal = UnityEngine.Random.Range(0, 100);
-			if(randomVal < chanceToMove && (Main.S.inDialog != true)){
+			if(randomVal < chanceToMove && (Main.S.inDialog != true) && Player.S.inScene0){
 				randomVal = UnityEngine.Random.Range(0, 100);
 				if(randomVal < 25 && (horizDist > (-leftRightDist)) && (gameObject.transform.position + Vector3.left != Player.S.transform.position)){ //try to move left
 					gameObject.transform.position += Vector3.left;

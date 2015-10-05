@@ -55,13 +55,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[0].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[0].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + Player.S.pokemon_list[0].pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[0].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[0].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -79,13 +79,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[1].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[1].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + Player.S.pokemon_list[1].pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[1].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[1].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -103,13 +103,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[2].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[2].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + Player.S.pokemon_list[2].pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[2].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[2].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -127,13 +127,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[3].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[3].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + BattleScreen.playerPokemon.pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[3].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[3].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -151,13 +151,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[4].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[4].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + BattleScreen.playerPokemon.pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[4].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[4].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -175,13 +175,13 @@ public class PokemonSwitchMenu : MonoBehaviour {
 				else {
 					if (BattleScreen.opponentPokemon.speed > BattleScreen.playerPokemon.speed){
 						BattleScreen.playerPokemon.takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
-						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName + "\n\n";
+						msg = BattleScreen.opponentPokemon.pkmnName + " attacks " + BattleScreen.playerPokemon.pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName + "\n\n";
 						msg += "Red switches his Pokemon to " + Player.S.pokemon_list[5].pkmnName;
 					}
 					else{
 						Player.S.pokemon_list[5].takeHit(BattleScreen.opponentPokemon.move1, BattleScreen.opponentPokemon, true);
 						msg = "Red switches his Pokemon to " + Player.S.pokemon_list[5].pkmnName + "\n\n";
-						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[5].pkmnName + " with " + BattleScreen.playerPokemon.move1.moveName;
+						msg += BattleScreen.opponentPokemon.pkmnName + " attacks " + Player.S.pokemon_list[5].pkmnName + " with " + BattleScreen.opponentPokemon.move1.moveName;
 					}
 					gameObject.SetActive(false);
 					HPSwitchTxt.S.gameObject.SetActive(false);
@@ -219,7 +219,7 @@ public class PokemonSwitchMenu : MonoBehaviour {
 	}
 
 	public static void UpdateSwitchMenu(){
-		GUIText mytext; //BattleScreen.playerPokemon.pkmnName;
+		GUIText mytext;
 		
 		mytext = GameObject.Find ("Pokemon1").GetComponent<GUIText> ();
 		mytext.text = Player.S.pokemon_list [0].pkmnName;

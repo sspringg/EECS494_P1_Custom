@@ -5,7 +5,7 @@ using System.Linq;
 
 public enum Item_list{
 	Pokeball,
-	Antidote,
+	Potion,
 	Palyz_Heal,
 	Burn_Heal,
 	Cancel
@@ -49,10 +49,10 @@ public class Mart_Options : MonoBehaviour {
 							Player.S.speakDictionary["Checkout_Front"] = 9;
 						Player.S.Mart_Options = false;
 						break;
-					case(int)Item_list.Antidote:
+					case(int)Item_list.Potion:
 						if(Player.S.money >= 100){
 							Player.S.money -= 100;
-							addPlayerItem("ANTIDOTE");
+							addPlayerItem("POTION");
 							Player.S.speakDictionary["Checkout_Front"] = 7;
 						}
 						else
