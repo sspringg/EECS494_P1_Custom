@@ -8,7 +8,7 @@ public enum menuItem{
 	pokemon,
 	item,
 	player,
-	save,
+	buy_item,
 	option,
 	exit
 }
@@ -16,7 +16,7 @@ public enum menuItem{
 public class Menu : MonoBehaviour {
 	public static Menu S;
 	public 	bool items_menu_active = false;
-	public	bool pokemon_menu_active = false;
+	public	bool pokemon_menu_active = false, mart_menu_active = false;
 	public int activeItem;
 	public bool	menuPaused = false;
 	public List<GameObject> menuItems;
@@ -44,7 +44,7 @@ public class Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Main.S.paused && !items_menu_active && !pokemon_menu_active){
+		if (Main.S.paused && !items_menu_active && !pokemon_menu_active && !mart_menu_active){
 			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem){ // at 1:14:00
 					case(int)menuItem.pokedex:
@@ -70,8 +70,10 @@ public class Menu : MonoBehaviour {
 					case(int)menuItem.player:
 						print("player menu selected");
 						break;
-					case(int)menuItem.save:
-						print("save menu selected");
+					case(int)menuItem.buy_item:
+						mart_menu_active = true;
+						Mart_Options.S.gameObject.SetActive(true);
+						menuPaused = true;
 						break;
 					case(int)menuItem.option:
 						print("option menu selected");

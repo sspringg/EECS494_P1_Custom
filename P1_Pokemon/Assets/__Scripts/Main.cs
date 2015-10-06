@@ -31,7 +31,7 @@ public class Main : MonoBehaviour {
 				Turn_Choice_Menu.S.gameObject.SetActive(true);
 			}
 			if(!inDialog && Input.GetKeyDown(KeyCode.Return) && Player.S.inScene0 && !Pokemon_Menu.S.gameObject.activeSelf
-			   && !Items_Menu.S.gameObject.activeSelf){
+			   && !Items_Menu.S.gameObject.activeSelf && !Mart_Options.S.gameObject.activeSelf){
 				Menu.S.gameObject.SetActive(true);
 				Player.S.allowedToMove = false;
 				Turn_Choice_Menu.S.pause_turn_menu = true;
@@ -39,7 +39,8 @@ public class Main : MonoBehaviour {
 			}
 			//exit menu when s is pushed
 			else if(Menu.S.gameObject.activeSelf && Input.GetKeyDown(KeyCode.S) && !Items_Menu.S.gameObject.activeSelf 
-			        && !Pokemon_Menu.S.gameObject.activeSelf && !Turn_Choice_Menu.S.gameObject.activeSelf){
+			        && !Pokemon_Menu.S.gameObject.activeSelf && !Turn_Choice_Menu.S.gameObject.activeSelf 
+			        && !Mart_Options.S.gameObject.activeSelf){
 				Menu.S.gameObject.SetActive(false);
 				paused = false;
 				Player.S.allowedToMove = true;
@@ -76,10 +77,11 @@ public class Main : MonoBehaviour {
 			}
 			else if(!inDialog && Input.GetKeyDown(KeyCode.S) && Player.S.Mart_Options){
 				Mart_Options.S.gameObject.SetActive(false);
-				Player.S.speakDictionary["Checkout_Front"] = 4;
-				Player.S.playerSpeaking = null;
-				Player.S.Mart_Options = false;
-				paused = false;
+				Menu.S.mart_menu_active = false;
+				Menu.S.menuPaused = false;
+//				Player.S.playerSpeaking = null;
+//				Player.S.Mart_Options = false;
+//				paused = false;
 			}
 		}
 	}

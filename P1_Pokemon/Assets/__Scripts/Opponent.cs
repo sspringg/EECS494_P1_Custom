@@ -44,7 +44,7 @@ public class Opponent : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(spacesMoved != 0 && !opponent_moving)
-			moveOpponentToward();		//keep moving until moved all spaces
+			moveOpponentForward();		//keep moving until moved all spaces
 			/*put game logic here. Right now I just have a basic switch statement that is always 1 to test the control of the game
 			but change the structure however you like. Also it would be nice to display the opponents choice before he does anything"*/
 		else if(!Main.S.playerTurn && !opponent_moving){
@@ -53,7 +53,6 @@ public class Opponent : MonoBehaviour {
 			randomVal = 1; //for testing
 			switch(randomVal){
 			case 1:		//oppponent	move
-				print("opponent move");
 				randomVal = UnityEngine.Random.Range(1, 10);
 				print("raval: " + randomVal);
 				spacesMoved = randomVal;
@@ -93,7 +92,13 @@ public class Opponent : MonoBehaviour {
 		}
 	}
 	public void moveOpponentToward(){
-		if((gameObject.transform.position.x - Player.S.transform.position.x) > 1 
+		if((Player.S.transform.position.y - gameObject.transform.position.y) > 1 
+		        && !Physics.Raycast(Player.S.GetRay(), out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.up;
+			sprend.sprite = upSprite;
+			opponent_moving = true;
+		}
+		else if((gameObject.transform.position.x - Player.S.transform.position.x) > 1 
 		   && !Physics.Raycast(Player.S.GetRay(), out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
 			opponent_moveVec = Vector3.left;
 			sprend.sprite = leftSprite;
@@ -103,12 +108,6 @@ public class Opponent : MonoBehaviour {
 		        && !Physics.Raycast(Player.S.GetRay(), out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
 			opponent_moveVec = Vector3.right;
 			sprend.sprite = rightSprite;
-			opponent_moving = true;
-		}
-		else if((Player.S.transform.position.y - gameObject.transform.position.y) > 1 
-		        && !Physics.Raycast(Player.S.GetRay(), out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
-			opponent_moveVec = Vector3.up;
-			sprend.sprite = upSprite;
 			opponent_moving = true;
 		}
 		else if((gameObject.transform.position.y - Player.S.transform.position.y) > 1 
@@ -163,5 +162,6 @@ public class Opponent : MonoBehaviour {
 			sprend.sprite = downSprite;
 			opponent_moving = true;
 		}
+		opponent_targetPos = opponent_pos + opponent_moveVec;
 	}
 }

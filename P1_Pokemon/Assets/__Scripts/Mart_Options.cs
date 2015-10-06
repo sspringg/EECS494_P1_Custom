@@ -36,57 +36,58 @@ public class Mart_Options : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Main.S.paused){
+		if (Main.S.paused && Menu.S.mart_menu_active){
 			if(Input.GetKeyDown(KeyCode.A)){
 				switch(activeItem - 1){ 
 					case(int)Item_list.Pokeball:
 						if(Player.S.money >= 200){
 							Player.S.money -= 200;
 							addPlayerItem("POKeBALL");
-							Player.S.speakDictionary["Checkout_Front"] = 6;
+//							Player.S.speakDictionary["Checkout_Front"] = 6;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 9;
+//							Player.S.speakDictionary["Checkout_Front"] = 9;
 						Player.S.Mart_Options = false;
 						break;
 					case(int)Item_list.Potion:
 						if(Player.S.money >= 100){
 							Player.S.money -= 100;
 							addPlayerItem("POTION");
-							Player.S.speakDictionary["Checkout_Front"] = 7;
+//							Player.S.speakDictionary["Checkout_Front"] = 7;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 9;
+//							Player.S.speakDictionary["Checkout_Front"] = 9;
 						Player.S.Mart_Options = false;
 						break;
 					case(int)Item_list.Palyz_Heal:
 						if(Player.S.money >= 200){
 							Player.S.money -= 200;
 							addPlayerItem("PALYZ_HEAL");
-							Player.S.speakDictionary["Checkout_Front"] = 8;
+//							Player.S.speakDictionary["Checkout_Front"] = 8;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 9;
+//							Player.S.speakDictionary["Checkout_Front"] = 9;
 						Player.S.Mart_Options = false;
 						break;
 					case (int)Item_list.Burn_Heal:
 						if(Player.S.money >= 250){
 							Player.S.money -= 250;
 							addPlayerItem("BURN_HEAL");
-							Player.S.speakDictionary["Checkout_Front"] = 8;
+//							Player.S.speakDictionary["Checkout_Front"] = 8;
 						}
 						else
-							Player.S.speakDictionary["Checkout_Front"] = 8;
+//							Player.S.speakDictionary["Checkout_Front"] = 8;
 						Player.S.Mart_Options = false;
 						break;
 					case -1:
-						Player.S.speakDictionary["Checkout_Front"] = 10;
+//						Player.S.speakDictionary["Checkout_Front"] = 10;
 						Player.S.Mart_Options = false;
 						break;
 				}
 				
 				gameObject.SetActive(false);
-				Main.S.paused = false;
+				Menu.S.menuPaused = false;
+				Menu.S.mart_menu_active = false;
 				Player.S.CheckForAction();
 			}
 			
