@@ -22,8 +22,9 @@ public class SpaceCounter : MonoBehaviour {
 			Player.S.moving = false;
 			Main.S.playerTurn = false;
 			Main.S.inTurn = false;
-			Main.S.choiceMade = false;
+			Main.S.choiceMade = -1;
 			Main.S.paused = true;
+			Player.S.allowedToMove = false;
 			gameObject.SetActive(false);	
 		}
 	}

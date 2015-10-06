@@ -27,7 +27,7 @@ public class POKeBALL : MonoBehaviour {
 				Player.S.pokemon_list.RemoveAt(Pokemon_Menu.S.pokemon_menu_chosen);
 				Main.S.paused = false;
 				Main.S.playerTurn = false;
-				Main.S.choiceMade = false;
+				Main.S.choiceMade = -1;
 				gameObject.SetActive(false);
 			}
 			else if(Input.GetKey(KeyCode.RightArrow)){

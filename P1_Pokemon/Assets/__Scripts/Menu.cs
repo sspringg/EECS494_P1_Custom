@@ -77,15 +77,15 @@ public class Menu : MonoBehaviour {
 						print("option menu selected");
 						break;
 					case(int)menuItem.exit:
-						gameObject.SetActive(false);
+						Main.S.paused = false;
 						Turn_Choice_Menu.S.pause_turn_menu = false;
+						if(Main.S.choiceMade == 0 || Main.S.choiceMade == -1)
+							Player.S.allowedToMove = true;
+						gameObject.SetActive(false);
 						break;
 				
 				}
 			}
-		}
-		if(Input.GetKeyDown(KeyCode.S)){
-			print("s down");
 		}
 		if(Input.GetKeyDown(KeyCode.DownArrow) && !menuPaused){
 			MoveDownMenu();

@@ -16,7 +16,8 @@ public class Main : MonoBehaviour {
 	public bool printDialog = false;
 	public bool paused = false;
 	public List<Pokeball_Info> player_pokeball = new List<Pokeball_Info>();
-	public bool playerTurn = true, inTurn = false, choiceMade = false;
+	public bool playerTurn = false, inTurn = false;
+	public int  choiceMade = -1;
 	void Awake(){
 		S = this;
 	}
@@ -27,12 +28,12 @@ public class Main : MonoBehaviour {
 		if(Player.S.inScene0){
 			if(playerTurn && Player.S.OpeningDialog && !inTurn){
 				inTurn = true;
-				paused = true;
 				Turn_Choice_Menu.S.gameObject.SetActive(true);
 			}
 			if(!inDialog && Input.GetKeyDown(KeyCode.Return) && Player.S.inScene0 && !Pokemon_Menu.S.gameObject.activeSelf
 			   && !Items_Menu.S.gameObject.activeSelf){
 				Menu.S.gameObject.SetActive(true);
+				Player.S.allowedToMove = false;
 				Turn_Choice_Menu.S.pause_turn_menu = true;
 				paused = true;
 			}
@@ -40,6 +41,8 @@ public class Main : MonoBehaviour {
 			else if(Menu.S.gameObject.activeSelf && Input.GetKeyDown(KeyCode.S) && !Items_Menu.S.gameObject.activeSelf 
 			        && !Pokemon_Menu.S.gameObject.activeSelf && !Turn_Choice_Menu.S.gameObject.activeSelf){
 				Menu.S.gameObject.SetActive(false);
+				paused = false;
+				Player.S.allowedToMove = true;
 				Turn_Choice_Menu.S.pause_turn_menu = false;
 			}
 			else if(inDialog && (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S)) && Player.S.ChoosingPokemon){

@@ -370,6 +370,7 @@ MonoBehaviour:
   fought_YS: 0
   OpeningDialog: 0
   inScene0: 1
+  allowedToMove: 1
   Healing_Pokemon: 0
   Mart_Options: 0
   pokedexEnable: 0
@@ -33687,7 +33688,7 @@ MonoBehaviour:
   paused: 0
   playerTurn: 1
   inTurn: 0
-  choiceMade: 0
+  choiceMade: -1
 --- !u!82 &1698426076
 AudioSource:
   m_ObjectHideFlags: 0

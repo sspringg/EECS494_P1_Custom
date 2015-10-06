@@ -41,7 +41,7 @@ public class Items_Menu : MonoBehaviour {
 		if (!Items_Menu_2_active && !Pokemon_Menu.S.bad_choice){ //Menu.S.menuPaused &&
 			setPlayerItems();
 			if(Input.GetKeyDown(KeyCode.A)){
-				if(activeItem == 5 && !Main.S.choiceMade){		//added choiceMade so cant cancel in turn
+				if(activeItem == 5 && Main.S.choiceMade == 0){		//added choiceMade so cant cancel in turn
 					gameObject.SetActive(false);
 					Menu.S.menuPaused = false;
 					Menu.S.items_menu_active = false;
@@ -53,10 +53,10 @@ public class Items_Menu : MonoBehaviour {
 					items_menu_paused = true;
 				}
 			}
-			if(Input.GetKeyDown(KeyCode.DownArrow) && !items_menu_paused){
+			if(Input.GetKeyDown(KeyCode.DownArrow) && !items_menu_paused && Main.S.choiceMade != -1){
 				MoveDownMenu();
 			}
-			else if (Input.GetKeyDown(KeyCode.UpArrow) && !items_menu_paused){
+			else if (Input.GetKeyDown(KeyCode.UpArrow) && !items_menu_paused && Main.S.choiceMade != -1){
 				MoveUpMenu();
 			}
 		}

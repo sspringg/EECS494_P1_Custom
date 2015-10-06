@@ -37,6 +37,7 @@ public class Pokemon_Menu : MonoBehaviour {
 			Menu.S.pokemon_menu_active = false;	
 		}
 		else if(Input.GetKeyDown(KeyCode.A) && place_pokemon_choice){
+			setPlayerItems();
 			place_pokemon_choice = false;
 			POKeBALL.S.gameObject.SetActive(true);
 			pokemon_menu_chosen = activeItem;
@@ -49,6 +50,7 @@ public class Pokemon_Menu : MonoBehaviour {
 					Pokemon_Menu_2.S.gameObject.SetActive(true);
 					pokemon_menu_2_active = true;
 					Pokemon_Menu_paused = true;
+					pokemon_menu_chosen = activeItem;
 			}
 			else if(Input.GetKeyDown(KeyCode.A) && moving_pokemon){
 				PokemonObject temp = Player.S.pokemon_list[activeItem];
@@ -66,7 +68,7 @@ public class Pokemon_Menu : MonoBehaviour {
 					Dialog.S.ShowMessage("This isn't the time to use that");
 					gameObject.SetActive(false);
 				}
-				else if(Items_Menu.S.itemChosen == "Potion"){ //change to poison
+				else if(Items_Menu.S.itemChosen == "POTION" && (Player.S.pokemon_list[activeItem].curHp < Player.S.pokemon_list[activeItem].totHp)){ //change to poison
 					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
 					if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0)
 						Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them
@@ -77,7 +79,7 @@ public class Pokemon_Menu : MonoBehaviour {
 					Items_Menu_2.S.usingItem = false;
 					Main.S.playerTurn = false;
 					Main.S.inTurn = false;
-					Main.S.choiceMade = false;
+					Main.S.choiceMade = -1;
 					gameObject.SetActive(false);
 				}
 				else{
@@ -94,12 +96,12 @@ public class Pokemon_Menu : MonoBehaviour {
 				MoveUpMenu();
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.S) && pokemon_menu_2_active && !Main.S.choiceMade){ //added choiceMade
+		if(Input.GetKeyDown(KeyCode.S) && pokemon_menu_2_active && Main.S.choiceMade == -1){ //added choiceMade
 			Pokemon_Menu_paused = false;
 			pokemon_menu_2_active = false;
 			Pokemon_Menu_2.S.gameObject.SetActive(false);
 		}
-		else if(Input.GetKeyDown(KeyCode.S) && !Pokemon_Menu_paused && !Main.S.choiceMade){
+		else if(Input.GetKeyDown(KeyCode.S) && !Pokemon_Menu_paused && Main.S.choiceMade == -1){
 			if(!pokemon_menu_2_active){
 				Menu.S.menuPaused = false;
 				Menu.S.pokemon_menu_active = false;

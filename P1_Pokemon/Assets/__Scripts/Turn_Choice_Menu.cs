@@ -40,14 +40,16 @@ public class Turn_Choice_Menu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Main.S.playerTurn){
+			Player.S.allowedToMove = false;
 			if(Input.GetKeyDown(KeyCode.A) && !pause_turn_menu){
 				switch(activeItem){ 
 				case(int)Turn_Choices.Move:
 					Player.S.spacesMoved = 0;
-					Main.S.paused = false;
+					Player.S.allowedToMove = true;
 					Player.S.moveLim = UnityEngine.Random.Range(1, 10);
 					SpaceCounter.S.gameObject.SetActive(true);
-					Main.S.choiceMade = true;
+					Main.S.choiceMade = 0;
+					Player.S.allowedToMove = true;
 					gameObject.SetActive(false);
 					break;
 				case(int)Turn_Choices.Place_Pokemon:
@@ -59,15 +61,16 @@ public class Turn_Choice_Menu : MonoBehaviour {
 					}
 					Pokemon_Menu.S.place_pokemon_choice = true;
 					Pokemon_Menu.S.gameObject.SetActive(true);
-					Main.S.choiceMade = true;
+					Main.S.choiceMade = 1;
 					gameObject.SetActive(false);
 					break;
 				case(int)Turn_Choices.Choose_Item:
-					Main.S.choiceMade = true;
+					Main.S.choiceMade = 2;
 					Items_Menu.S.gameObject.SetActive(true);
 					gameObject.SetActive(false);
 					break;
 				case(int)Turn_Choices.Battle:
+					Main.S.choiceMade = 3;
 					if(checkDistance((int)Player.S.transform.position.x, (int)Player.S.transform.position.y)){
 						Opponent.S.moveTowardPlayer = true;
 						gameObject.SetActive(false);

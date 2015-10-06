@@ -46,6 +46,7 @@ public class Player : MonoBehaviour {
 	public bool		fought_YS = false;
 	public bool		OpeningDialog = false;
 	public bool		inScene0 = true;
+	public bool 	allowedToMove = true;
 	
 	public bool		Healing_Pokemon = false;
 	public bool		Mart_Options = false;
@@ -103,7 +104,7 @@ public class Player : MonoBehaviour {
 		set{transform.position = value;}
 	}
 	void FixedUpdate(){
-		if(!moving && !Main.S.inDialog && !Main.S.paused && inScene0 && !Menu.S.gameObject.activeSelf){
+		if(!moving && !Main.S.inDialog && inScene0 && allowedToMove){
 			if(Input.GetKeyDown(KeyCode.A)){ //min 40
 				CheckForAction();
 			}

@@ -415,7 +415,7 @@ public class NPC : MonoBehaviour {
 		else if(playerName == "Grass_Shield"){
 			switch(Player.S.speakDictionary["Grass_Shield"]){
 			case -1:
-				Player.S.speakDictionary["Grass_Shield"] = 2;
+				Player.S.speakDictionary["Grass_Shield"] = 20;
 				return "Blue: You think you are so mighty with your new pokemon from Gramps?";
 			case 2:
 				Player.S.speakDictionary["Grass_Shield"] = 3;
@@ -474,6 +474,7 @@ public class NPC : MonoBehaviour {
 			case 21:
 				Player.S.playerSpeaking = null;
 				Player.S.OpeningDialog = true;
+				Main.S.playerTurn = true;
 				Grass_Shield.S.gameObject.SetActive(false);
 				Player.S.speakDictionary["Grass_Shield"] = -1;
 				return "EXIT";

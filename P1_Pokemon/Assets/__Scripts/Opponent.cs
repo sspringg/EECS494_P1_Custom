@@ -44,7 +44,7 @@ public class Opponent : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(spacesMoved != 0 && !opponent_moving)
-			moveOpponent();		//keep moving until moved all spaces
+			moveOpponentToward();		//keep moving until moved all spaces
 			/*put game logic here. Right now I just have a basic switch statement that is always 1 to test the control of the game
 			but change the structure however you like. Also it would be nice to display the opponents choice before he does anything"*/
 		else if(!Main.S.playerTurn && !opponent_moving){
@@ -55,9 +55,9 @@ public class Opponent : MonoBehaviour {
 			case 1:		//oppponent	move
 				print("opponent move");
 				randomVal = UnityEngine.Random.Range(1, 10);
-				moveOpponent();
 				print("raval: " + randomVal);
 				spacesMoved = randomVal;
+				moveOpponentForward();
 				break;
 			case 2:		//place pokemon
 				print("place pokemon");
@@ -77,8 +77,9 @@ public class Opponent : MonoBehaviour {
 				opponent_pos = opponent_targetPos; //around min 17
 				opponent_moving = false;
 				--spacesMoved;
-				print("spaceMoved: " + spacesMoved);
+				print("space move: " + spacesMoved);
 				if(spacesMoved == 0){
+					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;
 				}
 			}
@@ -88,10 +89,10 @@ public class Opponent : MonoBehaviour {
 			
 		}
 		else if(moveTowardPlayer){		//player called opponent into battle so move toward them
-			moveOpponent();
+			moveOpponentToward();
 		}
 	}
-	public void moveOpponent(){
+	public void moveOpponentToward(){
 		if((gameObject.transform.position.x - Player.S.transform.position.x) > 1 
 		   && !Physics.Raycast(Player.S.GetRay(), out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
 			opponent_moveVec = Vector3.left;
@@ -140,5 +141,27 @@ public class Opponent : MonoBehaviour {
 			}
 		}
 		opponent_targetPos = opponent_pos + opponent_moveVec;
+	}
+	public void moveOpponentForward(){
+		if(!Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.left;
+			sprend.sprite = leftSprite;
+			opponent_moving = true;
+		}
+		else if(!Physics.Raycast(gameObject.transform.position, Vector3.right, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.right;
+			sprend.sprite = rightSprite;
+			opponent_moving = true;
+		}
+		else if(!Physics.Raycast(gameObject.transform.position, Vector3.up, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.up;
+			sprend.sprite = upSprite;
+			opponent_moving = true;
+		}
+		else if(!Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.down;
+			sprend.sprite = downSprite;
+			opponent_moving = true;
+		}
 	}
 }
