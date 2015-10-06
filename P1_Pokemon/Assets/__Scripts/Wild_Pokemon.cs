@@ -17,7 +17,7 @@ public class Wild_Pokemon : MonoBehaviour {
 	}
 	void FixedUpdate(){
 			randomVal = UnityEngine.Random.Range(0, 100);
-			if(randomVal < chanceToMove && (Main.S.inDialog != true) && Player.S.inScene0){
+			if(randomVal < chanceToMove && (Main.S.inDialog != true) && Player.S.inScene0 && Main.S.choiceMade == -1){	//player has to be moving to get attack
 				randomVal = UnityEngine.Random.Range(0, 100);
 				if(randomVal < 25 && (horizDist > (-leftRightDist)) && (gameObject.transform.position + Vector3.left != Player.S.transform.position)){ //try to move left
 					gameObject.transform.position += Vector3.left;
