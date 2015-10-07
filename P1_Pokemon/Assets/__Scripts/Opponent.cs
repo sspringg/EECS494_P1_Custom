@@ -19,6 +19,7 @@ public class Opponent : MonoBehaviour {
 	public int cur_action = 0;
 	public bool action_selected = false;
 	public bool continue_moving = false;
+	public int checkpoint_dir = 1;
 	public Vector3 cur_checkpoint;
 	public Vector3	opponent_targetPos;
 	public Vector3	opponent_moveVec;
@@ -58,26 +59,37 @@ public class Opponent : MonoBehaviour {
 		cur_checkpoint.z = -0.01f;
 
 		dir_list.Add (Vector3.left);
+
 		for (int i = 0; i < 8; ++i)
 			dir_list.Add (Vector3.up);
+
 		for (int i = 0; i < 2; ++i)
 			dir_list.Add (Vector3.left);
+
 		for (int i = 0; i < 5; ++i)
 			dir_list.Add (Vector3.up);
+
 		for (int i = 0; i < 4; ++i)
 			dir_list.Add (Vector3.right);
+
 		for (int i = 0; i < 4; ++i)
 			dir_list.Add (Vector3.up);
+
 		for (int i = 0; i < 3; ++i)
 			dir_list.Add (Vector3.left);
+
 		for (int i = 0; i < 4; ++i)
 			dir_list.Add (Vector3.up);
+
 		for (int i = 0; i < 5; ++i)
 			dir_list.Add (Vector3.right);
+
 		for (int i = 0; i < 14; ++i)
 			dir_list.Add (Vector3.up);
+
 		for (int i = 0; i < 3; ++i)
 			dir_list.Add (Vector3.left);
+
 		for (int i = 0; i < 10; ++i)
 			dir_list.Add (Vector3.up);
 	}
@@ -182,7 +194,7 @@ public class Opponent : MonoBehaviour {
 						}
 					}
 					if(!alivePokemon){
-						//checkpoint();
+						checkpoint();
 					}
 					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;
@@ -279,6 +291,28 @@ public class Opponent : MonoBehaviour {
 			sprend.sprite = downSprite;
 			opponent_moving = true;
 		}
+		switch (dir_pos) {
+		case 11:
+			cur_checkpoint.x = 66;
+			cur_checkpoint.y = 77;
+			checkpoint_dir = dir_pos;
+			break;
+		case 16:
+			cur_checkpoint.x = 66;
+			cur_checkpoint.y = 82;
+			checkpoint_dir = dir_pos;
+			break;
+		case 24:
+			cur_checkpoint.x = 70;
+			cur_checkpoint.y = 86;
+			checkpoint_dir = dir_pos;
+			break;
+		case 31:
+			cur_checkpoint.x = 67;
+			cur_checkpoint.y = 90;
+			checkpoint_dir = dir_pos;
+			break;
+		}
 		/*
 		if(dir_list[dir_pos] == Vector3.left && !Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
 			opponent_moveVec = Vector3.left;
@@ -323,6 +357,6 @@ public class Opponent : MonoBehaviour {
 			Opponent.S.opponent_pokemon_list [j].move4.curPp = Opponent.S.opponent_pokemon_list [j].move4.totPp;
 			Opponent.S.opponent_pokemon_list [j].stat = pkmnStatus.OK;
 		}
-		S.dir_pos = 1;
+		S.dir_pos = S.checkpoint_dir;
 	}
 }
