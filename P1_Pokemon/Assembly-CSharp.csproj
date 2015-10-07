@@ -45,7 +45,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Gym_Locked.cs" />
      <Compile Include="Assets\__Scripts\AttackMenu.cs" />
      <Compile Include="Assets\__Scripts\AttackMove.cs" />
      <Compile Include="Assets\__Scripts\AttackMoveView.cs" />
@@ -59,6 +58,7 @@
      <Compile Include="Assets\__Scripts\FaintedViewer.cs" />
      <Compile Include="Assets\__Scripts\GameManager.cs" />
      <Compile Include="Assets\__Scripts\Grass_Shield.cs" />
+     <Compile Include="Assets\__Scripts\Gym_Locked.cs" />
      <Compile Include="Assets\__Scripts\HPSwitchTxt.cs" />
      <Compile Include="Assets\__Scripts\Heal_Pokemon.cs" />
      <Compile Include="Assets\__Scripts\Intro.cs" />
@@ -84,6 +84,7 @@
      <Compile Include="Assets\__Scripts\TurnActionViewer.cs" />
      <Compile Include="Assets\__Scripts\Turn_Choice_Menu.cs" />
      <Compile Include="Assets\__Scripts\Wild_Pokemon.cs" />
+     <Compile Include="Assets\__Scripts\Winning_Star.cs" />
      <None Include="Assets\Collision.txt" />
      <None Include="Assets\spriteText.txt" />
  <Reference Include="UnityEngine.UI">

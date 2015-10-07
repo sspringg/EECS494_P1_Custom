@@ -168,6 +168,7 @@ public class NPC : MonoBehaviour {
 		else if(playerName == "Pokemon_Choose_Table"){	//INITIAL Pokemon choosing table
 			switch(Player.S.speakDictionary["Pokemon_Choose_Table"]){
 			case -1:
+				Player.S.allowedToMove = false;
 				Player.S.speakDictionary["Pokemon_Choose_Table"] = 0;
 				return "";
 			case 0:
@@ -415,6 +416,8 @@ public class NPC : MonoBehaviour {
 		else if(playerName == "Grass_Shield"){
 			switch(Player.S.speakDictionary["Grass_Shield"]){
 			case -1:
+				Opponent.S.sprend.sprite = Opponent.S.leftSprite;
+				Player.S.sprend.sprite = Player.S.rightSprite;
 				Player.S.speakDictionary["Grass_Shield"] = 2;
 				return "Blue: You think you are so mighty with your new pokemon from Gramps?";
 			case 2:
@@ -479,6 +482,31 @@ public class NPC : MonoBehaviour {
 				Player.S.speakDictionary["Grass_Shield"] = -1;
 				return "EXIT";
 			}
+		}
+		else if(playerName == "Winning_Star"){
+			switch(Player.S.speakDictionary["Winning_Star"]){
+			case -1:
+				Player.S.speakDictionary["Winning_Star"] = 0;
+				Opponent.S.moveOpponentToward();
+				return "Blue: Congratulations Red! I never thought I'd say this but...";
+			case 1:
+				Player.S.speakDictionary["Winning_Star"] = 2;
+				return "Blue: you were a better trainer than me today";
+			case 2:
+				Player.S.speakDictionary["Winning_Star"] = 3;
+				return "Blue: Grandpa gave this to me when I was a young child...";
+			case 3:
+				Player.S.speakDictionary["Winning_Star"] = 4;
+				return "Blue: but I think today you showed you are the one that deserves it";
+			case 4:
+				Player.S.speakDictionary["Winning_Star"] = 5;
+				return "Blue: but I think today you showed you are the one that deserves it";
+			case 5:
+				Player.S.playerSpeaking = null;
+//				Winning_Screen.gameObject.SetActive(true);
+				Winning_Star.S.gameObject.SetActive(false);
+				return "EXIT";
+			}	
 		}
 		return "";		
 	}

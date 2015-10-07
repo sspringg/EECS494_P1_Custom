@@ -50,18 +50,6 @@ public class Items_Menu_2 : MonoBehaviour {
 						Items_Menu.S.gameObject.SetActive(false);
 						gameObject.SetActive(false);
 						break;
-					case 1:
-						if(Items_Menu.S.itemChosen != "Prof_Oak_Package"){
-							Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
-							if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0){
-								Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them
-							}
-							Items_Menu.S.ItemMenu_lists[Items_Menu.S.ItemMenu_lists.Count - 1].GetComponent<GUIText>().color = Color.red; 
-						}
-						Items_Menu.S.items_menu_paused = false;
-						Items_Menu.S.Items_Menu_2_active = false;
-						gameObject.SetActive(false);
-						break;	
 					}
 			}
 		}

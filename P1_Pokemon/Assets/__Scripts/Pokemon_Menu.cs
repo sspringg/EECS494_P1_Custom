@@ -68,7 +68,7 @@ public class Pokemon_Menu : MonoBehaviour {
 					Dialog.S.ShowMessage("This isn't the time to use that");
 					gameObject.SetActive(false);
 				}
-				else if(Items_Menu.S.itemChosen == "POTION" && (Player.S.pokemon_list[activeItem].curHp < Player.S.pokemon_list[activeItem].totHp)){ //change to poison
+				else if(Items_Menu.S.itemChosen == "POTION"){ //change to poison
 					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
 					if(Player.S.itemsDictionary[Items_Menu.S.itemChosen] == 0)
 						Player.S.itemsDictionary.Remove(Items_Menu.S.itemChosen);	//remove item if we have 0 of them

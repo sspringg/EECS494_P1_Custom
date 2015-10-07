@@ -60,6 +60,7 @@ public class Pokemon_Choose : MonoBehaviour {
 				gameObject.SetActive(false);
 				Main.S.paused = false;
 				Dialog.S.HideDialogBox();
+				Player.S.allowedToMove = true;
 				Player.S.ChosenPokemon = true;
 				Player.S.ChoosingPokemon = false;
 				Color noAlpha = GameObject.Find("Oak_Lab/Pokeball").GetComponent<SpriteRenderer>().color;
