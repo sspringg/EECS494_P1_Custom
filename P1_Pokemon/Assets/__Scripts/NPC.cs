@@ -458,7 +458,7 @@ public class NPC : MonoBehaviour {
 				return "This can only be done if you are in within 4 spaces of me";
 			case 15:
 				Player.S.speakDictionary["Grass_Shield"] = 16;
-				return "If you win, I will give you $250 to buy items";
+				return "If you win, I will give you $500 to buy items";
 			case 16:
 				Player.S.speakDictionary["Grass_Shield"] = 17;
 				return "and if at any point either in Trainer or POKeMON battle all of...";
@@ -502,6 +502,7 @@ public class NPC : MonoBehaviour {
 				Player.S.speakDictionary["Winning_Star"] = 5;
 				return "[Red received a bag of air]";
 			case 5:
+				Application.Quit();
 				Player.S.playerSpeaking = null;
 				Player.S.allowedToMove = true;
 				Main.S.playerTurn = true;

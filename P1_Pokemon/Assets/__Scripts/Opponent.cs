@@ -197,7 +197,7 @@ public class Opponent : MonoBehaviour {
 						opponent_itemsDictionary["POKeBALL"]--;
 						if(opponent_itemsDictionary["POKeBALL"] == 0)
 							opponent_itemsDictionary.Remove("POKeBALL");
-						Dialog.S.ShowMessage("Opponent ran into a wild " + pokemon_Encounter + "/n and captured her");
+						Dialog.S.ShowMessage("Opponent ran into a wild " + pokemon_Encounter + " and captured her");
 						for(int i = 0; i < opponent_pokemon_list.Count; ++i){
 							if(opponent_pokemon_list[i].pkmnName != "None"){
 								opponent_pokemon_list[i] = PokemonObject.getPokemon(pokemon_Encounter);
