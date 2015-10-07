@@ -111,65 +111,45 @@ public class Player : MonoBehaviour {
 		set{transform.position = value;}
 	}
 	void FixedUpdate(){
-		if (!moving && !Main.S.inDialog && inScene0 && allowedToMove) {
-			if (Input.GetKeyDown (KeyCode.A)) { //min 40
-				CheckForAction ();
+		if(!moving && !Main.S.inDialog && inScene0 && allowedToMove){
+			if(Input.GetKeyDown(KeyCode.A)){ //min 40
+				CheckForAction();
 			}
 			//ARROW KEYS		
-			else if (Input.GetKey (KeyCode.RightArrow)) {
+			else if(Input.GetKey(KeyCode.RightArrow)){
 				moveVec = Vector3.right;
 				direction = Direction.right;
 				sprend.sprite = rightSprite;
 				moving = true;
-			} else if (Input.GetKey (KeyCode.LeftArrow)) {
+			}
+			else if(Input.GetKey(KeyCode.LeftArrow)){
 				moveVec = Vector3.left;
 				direction = Direction.left;
 				sprend.sprite = leftSprite;
 				moving = true;
-			} else if (Input.GetKey (KeyCode.UpArrow)) {
+			}
+			else if(Input.GetKey(KeyCode.UpArrow)){
 				moveVec = Vector3.up;
 				direction = Direction.up;
 				sprend.sprite = upSprite;
 				moving = true;
-			} else if (Input.GetKey (KeyCode.DownArrow)) {
+			}
+			else if(Input.GetKey(KeyCode.DownArrow)){
 				moveVec = Vector3.down;
 				direction = Direction.down;
 				sprend.sprite = downSprite;
 				moving = true;
-			} else {
+			}
+			
+			else{
 				moveVec = Vector3.zero;
 				moving = false;
 			}
-			if (S.pos.x == 68 && S.pos.y == 113) {
+			if ((S.pos.x == 68 && S.pos.y == 113) || (S.pos.x == 69 && S.pos.y == 114)){
 				allowedToMove = false;
-				CheckForAction ();
-				print ("you win");
-				Opponent.S.gameObject.SetActive (false);
-			}
-
-			if (S.pos.y >= 77) {
-				cur_checkpoint.x = 66;
-				cur_checkpoint.y = 77;
-			}
-			if (S.pos.y >= 82) {
-				cur_checkpoint.x = 66;
-				cur_checkpoint.y = 82;
-			}
-			if (S.pos.y >= 86) {
-				cur_checkpoint.x = 70;
-				cur_checkpoint.y = 86;
-			}
-			if (S.pos.y >= 90) {
-				cur_checkpoint.x = 67;
-				cur_checkpoint.y = 90;
-			}
-			if (S.pos.x >= 72) {
-				cur_checkpoint.x = 72;
-				cur_checkpoint.y = 90;
-			}
-			if (S.pos.y >= 104){
-				cur_checkpoint.x = 72;
-				cur_checkpoint.y = 104;
+				CheckForAction();
+				print("you win");
+				Opponent.S.gameObject.SetActive(false);
 			}
 			//////////////////////////////////////
 			//minute 25

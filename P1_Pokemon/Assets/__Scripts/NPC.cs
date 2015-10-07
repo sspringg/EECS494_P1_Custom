@@ -418,7 +418,7 @@ public class NPC : MonoBehaviour {
 			case -1:
 				Opponent.S.sprend.sprite = Opponent.S.leftSprite;
 				Player.S.sprend.sprite = Player.S.rightSprite;
-				Player.S.speakDictionary["Grass_Shield"] = 20;
+				Player.S.speakDictionary["Grass_Shield"] = 2;
 				return "Blue: You think you are so mighty with your new pokemon from Gramps?";
 			case 2:
 				Player.S.speakDictionary["Grass_Shield"] = 3;
@@ -455,10 +455,10 @@ public class NPC : MonoBehaviour {
 				return "4: Call me to battle you. ";
 			case 14:
 				Player.S.speakDictionary["Grass_Shield"] = 15;
-				return "This can only be done if you are in front of me because I will come to your location";
+				return "This can only be done if you are in within 4 spaces of me";
 			case 15:
 				Player.S.speakDictionary["Grass_Shield"] = 16;
-				return "If you win, I will give you $250 to buy items";
+				return "If you win, I will give you $500 to buy items";
 			case 16:
 				Player.S.speakDictionary["Grass_Shield"] = 17;
 				return "and if at any point either in Trainer or POKeMON battle all of...";
@@ -486,7 +486,7 @@ public class NPC : MonoBehaviour {
 		else if(playerName == "Winning_Star"){
 			switch(Player.S.speakDictionary["Winning_Star"]){
 			case -1:
-				Player.S.speakDictionary["Winning_Star"] = 0;
+				Player.S.speakDictionary["Winning_Star"] = 1;
 				Opponent.S.moveOpponentToward();
 				return "Blue: Congratulations Red! I never thought I'd say this but...";
 			case 1:
@@ -494,16 +494,18 @@ public class NPC : MonoBehaviour {
 				return "Blue: you were a better trainer than me today";
 			case 2:
 				Player.S.speakDictionary["Winning_Star"] = 3;
-				return "Blue: Grandpa gave this to me when I was a young child...";
+				return "Blue: Grandpa gave me something special when I was a young child...";
 			case 3:
 				Player.S.speakDictionary["Winning_Star"] = 4;
 				return "Blue: but I think today you showed you are the one that deserves it";
 			case 4:
 				Player.S.speakDictionary["Winning_Star"] = 5;
-				return "Blue: but I think today you showed you are the one that deserves it";
+				return "[Red received a bag of air]";
 			case 5:
+				Application.Quit();
 				Player.S.playerSpeaking = null;
-//				Winning_Screen.gameObject.SetActive(true);
+				Player.S.allowedToMove = true;
+				Main.S.playerTurn = true;
 				Winning_Star.S.gameObject.SetActive(false);
 				return "EXIT";
 			}	

@@ -25733,7 +25733,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.39999998, y: 1, z: .200000003}
+  m_Size: {x: 1, y: 1, z: .200000003}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1303480074
 Transform:
@@ -26224,6 +26224,7 @@ MonoBehaviour:
   cur_action: 0
   action_selected: 0
   continue_moving: 0
+  checkpoint_dir: 1
   cur_checkpoint: {x: 0, y: 0, z: 0}
   opponent_targetPos: {x: 0, y: 0, z: 0}
   opponent_moveVec: {x: 0, y: 0, z: 0}
