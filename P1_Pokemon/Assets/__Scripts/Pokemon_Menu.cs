@@ -67,6 +67,11 @@ public class Pokemon_Menu : MonoBehaviour {
 					Items_Menu.S.gameObject.SetActive(true);
 					Dialog.S.ShowMessage("This isn't the time to use that");
 					gameObject.SetActive(false);
+					Items_Menu_2.S.usingItem = false;
+					Main.S.playerTurn = false;
+					Main.S.inTurn = false;
+					Main.S.choiceMade = -1;
+					gameObject.SetActive(false);
 				}
 				else if(Items_Menu.S.itemChosen == "POTION"){ //change to poison
 					Player.S.itemsDictionary[Items_Menu.S.itemChosen]--;
@@ -85,6 +90,11 @@ public class Pokemon_Menu : MonoBehaviour {
 				else{
 					Items_Menu.S.gameObject.SetActive(true);
 					Dialog.S.ShowMessage("This will have no effect");
+					gameObject.SetActive(false);
+					Items_Menu_2.S.usingItem = false;
+					Main.S.playerTurn = false;
+					Main.S.inTurn = false;
+					Main.S.choiceMade = -1;
 					gameObject.SetActive(false);
 				}
 				
