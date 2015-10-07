@@ -418,7 +418,7 @@ public class NPC : MonoBehaviour {
 			case -1:
 				Opponent.S.sprend.sprite = Opponent.S.leftSprite;
 				Player.S.sprend.sprite = Player.S.rightSprite;
-				Player.S.speakDictionary["Grass_Shield"] = 2;
+				Player.S.speakDictionary["Grass_Shield"] = 20;
 				return "Blue: You think you are so mighty with your new pokemon from Gramps?";
 			case 2:
 				Player.S.speakDictionary["Grass_Shield"] = 3;

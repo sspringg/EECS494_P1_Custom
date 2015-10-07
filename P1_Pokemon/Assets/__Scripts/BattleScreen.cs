@@ -43,6 +43,9 @@ public class BattleScreen : MonoBehaviour {
 		case 6:
 			updatePokemon (false, PokemonObject.getPokemon ("Pidgey"));
 			break;
+		case 7:
+			updatePokemon (false, Player.S.engagedPokemon);
+			break;
 		default:
 			updatePokemon (false, PokemonObject.getPokemon ("Caterpie"));
 			break;

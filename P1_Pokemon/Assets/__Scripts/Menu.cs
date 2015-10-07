@@ -64,6 +64,9 @@ public class Menu : MonoBehaviour {
 						break;
 					case(int)menuItem.item:
 						items_menu_active = true;
+						Items_Menu.S.ItemMenu_lists[Items_Menu.S.activeItem].GetComponent<GUIText>().color = Color.black;
+						Items_Menu.S.activeItem = Items_Menu.S.ItemMenu_lists.Count - 1;
+						Items_Menu.S.ItemMenu_lists[Items_Menu.S.activeItem].GetComponent<GUIText>().color = Color.red;
 						Items_Menu.S.gameObject.SetActive(true);
 						menuPaused = true;
 						break;

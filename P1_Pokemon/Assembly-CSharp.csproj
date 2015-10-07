@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\__Scripts\ActionViewer.cs" />
      <Compile Include="Assets\__Scripts\AttackMenu.cs" />
      <Compile Include="Assets\__Scripts\AttackMove.cs" />
      <Compile Include="Assets\__Scripts\AttackMoveView.cs" />
@@ -81,6 +82,7 @@
      <Compile Include="Assets\__Scripts\ShowMapOnCamera.cs" />
      <Compile Include="Assets\__Scripts\SpaceCounter.cs" />
      <Compile Include="Assets\__Scripts\Tile.cs" />
+     <Compile Include="Assets\__Scripts\Trap.cs" />
      <Compile Include="Assets\__Scripts\TurnActionViewer.cs" />
      <Compile Include="Assets\__Scripts\Turn_Choice_Menu.cs" />
      <Compile Include="Assets\__Scripts\Wild_Pokemon.cs" />

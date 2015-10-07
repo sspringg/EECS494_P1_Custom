@@ -41,11 +41,11 @@ public class Items_Menu : MonoBehaviour {
 		if (!Items_Menu_2_active && !Pokemon_Menu.S.bad_choice){ //Menu.S.menuPaused &&
 			setPlayerItems();
 			if(Input.GetKeyDown(KeyCode.A)){
-				print("A down");
 				if(activeItem == 5 && Main.S.choiceMade == -1){		//added choiceMade so cant cancel in turn
 					gameObject.SetActive(false);
 					Menu.S.menuPaused = false;
 					Menu.S.items_menu_active = false;
+
 				}
 				else if(Main.S.inTurn && activeItem != 5){
 					itemChosen = ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Substring(0, ItemMenu_lists[activeItem].GetComponent<GUIText>().text.Length - 4);
@@ -93,7 +93,10 @@ public class Items_Menu : MonoBehaviour {
 				ItemMenu_lists[i].GetComponent<GUIText>().text = entry.Key + " X " + entry.Value;
 				++i;
 		}
-		for(int j = i; j < ItemMenu_lists.Count - 1; ++j){
+		int loop_size = ItemMenu_lists.Count - 1;
+		if(Main.S.choiceMade != -1)	//removes cancel option during player turn
+			--loop_size;
+		for(int j = i; j < loop_size; ++j){
 			ItemMenu_lists[j].GetComponent<GUIText>().text = "";
 		}
 	}

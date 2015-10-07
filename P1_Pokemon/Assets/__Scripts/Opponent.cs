@@ -15,6 +15,7 @@ public class Opponent : MonoBehaviour {
 	public SpriteRenderer	sprend;
 	public int randomVal, spacesMoved = 0;
 	public int	moveSpeed = 4;
+	public double epsilon = .05;
 	public int cur_action = 0;
 	public bool action_selected = false;
 	public bool continue_moving = false;
@@ -88,10 +89,8 @@ public class Opponent : MonoBehaviour {
 		else if (!Main.S.playerTurn && !opponent_moving && !action_selected) {
 			action_selected = true;
 			cur_action = 0;
-			print ("! player turn");
 			if (S.opponent_pos.y < Player.S.pos.y) {
 				randomVal = UnityEngine.Random.Range (1, 10);
-				print ("raval: " + randomVal);
 				spacesMoved = randomVal;
 				cur_action = 1;
 				ActionViewer.S.gameObject.SetActive(true);
@@ -117,12 +116,84 @@ public class Opponent : MonoBehaviour {
 			}
 		}
 		else if(opponent_moving){
-			//opponent is moving
+			//see if they run into player_Pokemon
+			for(int i = 0; i < Main.S.player_pokeball.Count; ++i){
+				if(Math.Abs(Main.S.player_pokeball[i].x - transform.position.x) < epsilon && Math.Abs(Main.S.player_pokeball[i].x - transform.position.x) < epsilon){
+					Dialog.S.gameObject.SetActive(true);
+					Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
+					noAlpha.a = 255;
+					GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
+					Dialog.S.ShowMessage("Opponent ran into " + Main.S.player_pokeball[i].place_pokemon.pkmnName);
+					//logic to take pokeMon Health
+					randomVal = UnityEngine.Random.Range (35, 70);
+					int hp_take = Main.S.player_pokeball[i].place_pokemon.curHp * randomVal/100;
+					bool alivePokemon = false;	
+					foreach(PokemonObject obj in opponent_pokemon_list){
+						if(obj.curHp < hp_take){
+							obj.curHp = 0;
+							hp_take -= obj.curHp;
+						}
+						else{
+							obj.curHp -= hp_take;
+							alivePokemon = true;
+							break;
+						}
+					}
+					Main.S.player_pokeball.RemoveAt(i);
+					if(!alivePokemon)
+						//checkpoint();
+					spacesMoved = 1;
+					Turn_Choice_Menu.S.gameObject.SetActive(true);
+					Main.S.playerTurn = true;
+				}	
+			}
+			//////possibly make opponent run into wild pokemon
+			if((transform.position.x >= 67 && transform.position.x <= 68 && transform.position.y >= 70 && transform.position.x <= 75) || 
+			   (transform.position.x >= 64 && transform.position.x <= 67 && transform.position.y >= 78 && transform.position.x <= 79) ||
+			   (transform.position.x >= 70 && transform.position.x <= 73 && transform.position.y >= 82 && transform.position.x <= 85) || 
+			   (transform.position.x >= 72 && transform.position.x <= 75 && transform.position.y >= 92 && transform.position.x <= 95) ||
+			   (transform.position.x >= 68 && transform.position.x <= 75 && transform.position.y >= 98 && transform.position.x <= 101)){
+				randomVal = UnityEngine.Random.Range(0, 100);
+			   	if(randomVal < 2){
+					Dialog.S.gameObject.SetActive(true);
+					Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
+					noAlpha.a = 255;
+					GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
+					randomVal = UnityEngine.Random.Range(0, 1);
+					int hp_take;
+					if(randomVal == 0){
+						Dialog.S.ShowMessage("Opponent ran into a wild Caterpie");
+						hp_take = 30;
+					}
+					else{
+						Dialog.S.ShowMessage("Opponent ran into a wild Caterpie");
+						hp_take = 35;
+					}
+					bool alivePokemon = false;	
+					foreach(PokemonObject obj in opponent_pokemon_list){
+						if(obj.curHp < hp_take){
+							obj.curHp = 0;
+							hp_take -= obj.curHp;
+						}
+						else{
+							obj.curHp -= hp_take;
+							alivePokemon = true;
+							break;
+						}
+					}
+					if(!alivePokemon){
+						//checkpoint();
+					}
+					Turn_Choice_Menu.S.gameObject.SetActive(true);
+					Main.S.playerTurn = true;
+					spacesMoved = 1;
+	
+			   	}
+			}
 			if((opponent_targetPos - opponent_pos).magnitude < moveSpeed * Time.fixedDeltaTime){
 				opponent_pos = opponent_targetPos; //around min 17
 				opponent_moving = false;
 				--spacesMoved;
-				print("space move: " + spacesMoved);
 				if(spacesMoved == 0){
 					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;

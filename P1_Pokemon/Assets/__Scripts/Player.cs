@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -25,12 +26,13 @@ public class Player : MonoBehaviour {
 	public PokemonObject YS_pkmn;
 	public PokemonObject wildPkmn1;
 	public PokemonObject wildPkmn2;
+	public PokemonObject engagedPokemon;
 	public int enemyNo;
 	public float 	moveSpeed;
 	public int		tileSize;
 	public int spacesMoved;
 	public int moveLim;
-	
+	public double epsilon = .05;
 	public SpriteRenderer	sprend;
 	public	Sprite	upSprite;
 	public	Sprite	downSprite;
@@ -162,6 +164,16 @@ public class Player : MonoBehaviour {
 			targetPos = pos + moveVec;
 		}
 		else{
+			//battle if player runs into opponents pokemon
+			for(int i = 0; i < Opponent.S.opponent_pokeball.Count; ++i){
+				if(Math.Abs(Opponent.S.opponent_pokeball[i].x - transform.position.x) < epsilon && Math.Abs(Opponent.S.opponent_pokeball[i].x - transform.position.x) < epsilon){
+					Main.S.playerTurn = false;
+					engagedPokemon = Opponent.S.opponent_pokeball[i].place_pokemon;
+					enemyNo = 7;
+					Opponent.S.opponent_pokeball.RemoveAt(i);
+					Application.LoadLevelAdditive ("_Scene_2");
+				}
+			}
 			if((targetPos - pos).magnitude < moveSpeed * Time.fixedDeltaTime){
 				pos = targetPos; //around min 17
 				moving = false;

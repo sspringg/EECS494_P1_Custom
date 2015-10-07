@@ -53,16 +53,24 @@ public class Turn_Choice_Menu : MonoBehaviour {
 					gameObject.SetActive(false);
 					break;
 				case(int)Turn_Choices.Place_Pokemon:
-					if(Player.S.pokemon_list.Count == 1){
+					int pokeCount = 0;
+					foreach(PokemonObject obj in Player.S.pokemon_list){
+						if(obj.pkmnName != "None")
+							++pokeCount;
+					}
+					print("count: " + pokeCount);
+					if(pokeCount <= 1){
 						Dialog.S.gameObject.SetActive(true);
 						Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
 						noAlpha.a = 255;
 						Dialog.S.ShowMessage("It's too dangerous to have no pokemon");
 					}
-					Pokemon_Menu.S.place_pokemon_choice = true;
-					Pokemon_Menu.S.gameObject.SetActive(true);
-					Main.S.choiceMade = 1;
-					gameObject.SetActive(false);
+					else{
+						Pokemon_Menu.S.place_pokemon_choice = true;
+						Pokemon_Menu.S.gameObject.SetActive(true);
+						Main.S.choiceMade = 1;
+						gameObject.SetActive(false);
+					}
 					break;
 				case(int)Turn_Choices.Choose_Item:
 					Main.S.choiceMade = 2;

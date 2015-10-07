@@ -24,7 +24,7 @@ public class POKeBALL : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.A)){
 				Main.S.player_pokeball.Add(new Pokeball_Info((int)transform.position.x, (int)transform.position.y,
 				                                             Player.S.pokemon_list[Pokemon_Menu.S.pokemon_menu_chosen]));
-				Player.S.pokemon_list.RemoveAt(Pokemon_Menu.S.pokemon_menu_chosen);
+				Player.S.pokemon_list[Pokemon_Menu.S.pokemon_menu_chosen] = PokemonObject.getPokemon ("None");
 				Main.S.paused = false;
 				Main.S.playerTurn = false;
 				Main.S.choiceMade = -1;

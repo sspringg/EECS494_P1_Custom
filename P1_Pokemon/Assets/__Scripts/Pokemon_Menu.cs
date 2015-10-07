@@ -75,7 +75,7 @@ public class Pokemon_Menu : MonoBehaviour {
 					Player.S.pokemon_list[activeItem].curHp += 10;
 					if(Player.S.pokemon_list[activeItem].curHp > Player.S.pokemon_list[activeItem].totHp)
 						Player.S.pokemon_list[activeItem].curHp = Player.S.pokemon_list[activeItem].totHp;
-					Dialog.S.ShowMessage(Player.S.pokemon_list[activeItem].pkmnName + " is cured");
+					Dialog.S.HideDialogBox();
 					Items_Menu_2.S.usingItem = false;
 					Main.S.playerTurn = false;
 					Main.S.inTurn = false;
