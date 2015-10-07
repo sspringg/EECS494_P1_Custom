@@ -6,6 +6,7 @@ public class BattleScreen : MonoBehaviour {
 	public static BattleScreen S;
 	public static PokemonObject playerPokemon;
 	public static PokemonObject opponentPokemon;
+	public int i;
 
 	void Awake(){
 		S = this;
@@ -30,12 +31,14 @@ public class BattleScreen : MonoBehaviour {
 			updatePokemon (false, Player.S.YS_pkmn);
 			break;
 		case 4:
-			for (int i = 0; i < 6; ++i) {
+			for (i = 0; i < 6; ++i) {
 				if (Opponent.S.opponent_pokemon_list [i].curHp > 0) {
 					BattleScreen.updatePokemon (false, Opponent.S.opponent_pokemon_list [i]);
 					break;
 				}
 			}
+			if (i == 6)
+				Opponent.checkpoint();
 			break;
 		case 5:
 			updatePokemon (false, PokemonObject.getPokemon ("Caterpie"));

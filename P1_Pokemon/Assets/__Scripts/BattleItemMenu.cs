@@ -75,6 +75,8 @@ public class BattleItemMenu : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(KeyCode.S)){
 			gameObject.SetActive(false);
+			BottomMenu.S.gameObject.SetActive(true);
+			BattleScreen.S.gameObject.SetActive(true);
 		}
 	}
 

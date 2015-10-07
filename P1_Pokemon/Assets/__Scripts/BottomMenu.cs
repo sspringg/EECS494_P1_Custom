@@ -69,7 +69,7 @@ public class BottomMenu : MonoBehaviour {
 				print("Run selected");
 				BottomMenu.S.gameObject.SetActive(false);
 				TurnActionViewer.S.gameObject.SetActive(true);
-				if (Player.S.enemyNo > 3){
+				if (Player.S.enemyNo > 4){
 					if (UnityEngine.Random.Range(0, 10) > 4){
 						TurnActionViewer.S.run = true;
 						TurnActionViewer.printMessage("Ran away successfully!");

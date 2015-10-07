@@ -165,7 +165,7 @@ public class Opponent : MonoBehaviour {
 			   (transform.position.x >= 70 && transform.position.x <= 73 && transform.position.y >= 82 && transform.position.x <= 85) || 
 			   (transform.position.x >= 72 && transform.position.x <= 75 && transform.position.y >= 92 && transform.position.x <= 95) ||
 			   (transform.position.x >= 68 && transform.position.x <= 75 && transform.position.y >= 98 && transform.position.x <= 101)){
-				randomVal = UnityEngine.Random.Range(0, 100);
+				randomVal = UnityEngine.Random.Range(0, 400);
 			   	if(randomVal < 2){
 					Dialog.S.gameObject.SetActive(true);
 					Color noAlpha = GameObject.Find("DialogBackground").GetComponent<GUITexture>().color;
@@ -310,6 +310,16 @@ public class Opponent : MonoBehaviour {
 		case 31:
 			cur_checkpoint.x = 67;
 			cur_checkpoint.y = 90;
+			checkpoint_dir = dir_pos;
+			break;
+		case 36:
+			cur_checkpoint.x = 72;
+			cur_checkpoint.y = 90;
+			checkpoint_dir = dir_pos;
+			break;
+		case 50:
+			cur_checkpoint.x = 72;
+			cur_checkpoint.y = 104;
 			checkpoint_dir = dir_pos;
 			break;
 		}
