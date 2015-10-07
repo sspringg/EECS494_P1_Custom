@@ -113,6 +113,9 @@ public class Mart_Options : MonoBehaviour {
 		if (!Player.S.itemsDictionary.ContainsKey(itemType)) {
 			Player.S.itemsDictionary.Add(itemType,0);
 		}
-		++Player.S.itemsDictionary[itemType]; 
+		if (!Opponent.S.opponent_itemsDictionary.ContainsKey(itemType)) {
+			Opponent.S.opponent_itemsDictionary.Add(itemType,0);
+		}
+		++Opponent.S.opponent_itemsDictionary[itemType]; 
 	}
 }

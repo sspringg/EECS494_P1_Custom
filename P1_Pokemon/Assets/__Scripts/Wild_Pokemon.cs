@@ -9,7 +9,7 @@ public class Wild_Pokemon : MonoBehaviour {
 	public UnityEngine.Random random = new UnityEngine.Random();
 	void OnTriggerEnter(Collider coll){
 		randomVal = UnityEngine.Random.Range(0, 100);
-		if (randomVal < chanceToFight) {
+		if (randomVal < chanceToFight && Main.S.choiceMade == 0) {
 			Player.S.inScene0 = false;
 			Application.LoadLevelAdditive ("_Scene_2");
 			Player.S.enemyNo = UnityEngine.Random.Range(5, 7);
@@ -17,7 +17,7 @@ public class Wild_Pokemon : MonoBehaviour {
 	}
 	void FixedUpdate(){
 			randomVal = UnityEngine.Random.Range(0, 100);
-			if(randomVal < chanceToMove && (Main.S.inDialog != true) && Player.S.inScene0 && Main.S.choiceMade == -1){	//player has to be moving to get attack
+			if(randomVal < chanceToMove && (Main.S.inDialog != true) && Player.S.inScene0){	//player has to be moving to get attack
 				randomVal = UnityEngine.Random.Range(0, 100);
 				if(randomVal < 25 && (horizDist > (-leftRightDist)) && (gameObject.transform.position + Vector3.left != Player.S.transform.position)){ //try to move left
 					gameObject.transform.position += Vector3.left;

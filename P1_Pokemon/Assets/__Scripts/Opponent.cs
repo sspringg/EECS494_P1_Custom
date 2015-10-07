@@ -51,7 +51,7 @@ public class Opponent : MonoBehaviour {
 		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
 		opponent_pokemon_list[0] = PokemonObject.getPokemon ("Squirtle");
 		opponent_pokemon_list[1] = PokemonObject.getPokemon ("Caterpie");
-		opponent_itemsDictionary.Add("POTION",1);
+		opponent_itemsDictionary.Add("POTION",2);
 		opponent_itemsDictionary.Add("POKeBALL",2);
 
 		cur_checkpoint.x = 68;
@@ -110,12 +110,17 @@ public class Opponent : MonoBehaviour {
 				continue_moving = false;
 			} else {
 				randomVal = UnityEngine.Random.Range (0, 2);
+				int pokeCount = 0;
+				foreach(PokemonObject obj in opponent_pokemon_list){
+					if(obj.pkmnName != "None")
+						++pokeCount;
+				}
 				if (S.opponent_pos.y - Player.S.pos.y <= 4 && Mathf.Abs(S.opponent_pos.x - Player.S.pos.x) <= 4){
 					cur_action = 2;
 					ActionViewer.S.gameObject.SetActive(true);
 					ActionViewer.printMessage("Opponent chose to battle");
 				}
-				else if(randomVal == 0){
+				else if(randomVal == 0 && pokeCount > 1){
 					cur_action = 3;
 					ActionViewer.S.gameObject.SetActive(true);
 					ActionViewer.printMessage("Opponent chose to place trap");
@@ -153,10 +158,10 @@ public class Opponent : MonoBehaviour {
 					}
 					Main.S.player_pokeball.RemoveAt(i);
 					if(!alivePokemon)
-						//checkpoint();
-					spacesMoved = 1;
+						checkpoint();
 					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;
+					spacesMoved = 1;
 				}	
 			}
 			//////possibly make opponent run into wild pokemon
@@ -173,15 +178,36 @@ public class Opponent : MonoBehaviour {
 					GameObject.Find("DialogBackground").GetComponent<GUITexture>().color = noAlpha;
 					randomVal = UnityEngine.Random.Range(0, 1);
 					int hp_take;
+					string pokemon_Encounter;
 					if(randomVal == 0){
-						Dialog.S.ShowMessage("Opponent ran into a wild Caterpie");
 						hp_take = 30;
+						pokemon_Encounter = "Caterpie";
 					}
 					else{
-						Dialog.S.ShowMessage("Opponent ran into a wild Caterpie");
+						pokemon_Encounter = "Pidgey";
 						hp_take = 35;
 					}
-					bool alivePokemon = false;	
+					int pokeCount = 0;
+					foreach(PokemonObject obj in opponent_pokemon_list){
+						if(obj.pkmnName != "None")
+							++pokeCount;
+					}
+					randomVal = UnityEngine.Random.Range(0, 100);
+					if(randomVal < 20 && pokeCount < 4 && opponent_itemsDictionary.ContainsKey("POKeBALL")){
+						opponent_itemsDictionary["POKeBALL"]--;
+						if(opponent_itemsDictionary["POKeBALL"] == 0)
+							opponent_itemsDictionary.Remove("POKeBALL");
+						Dialog.S.ShowMessage("Opponent ran into a wild " + pokemon_Encounter + "/n and captured her");
+						for(int i = 0; i < opponent_pokemon_list.Count; ++i){
+							if(opponent_pokemon_list[i].pkmnName != "None"){
+								opponent_pokemon_list[i] = PokemonObject.getPokemon(pokemon_Encounter);
+								break;	
+							}
+						}
+					}
+					else
+						Dialog.S.ShowMessage("Opponent ran into a wild " + pokemon_Encounter);
+					bool alivePokemon = false;
 					foreach(PokemonObject obj in opponent_pokemon_list){
 						if(obj.curHp < hp_take){
 							obj.curHp = 0;

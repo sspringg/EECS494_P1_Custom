@@ -29,7 +29,34 @@ public class ActionViewer : MonoBehaviour {
 				Player.S.enemyNo = 4;
 				break;
 			case 3:
-				//place trap
+				if(Player.S.transform.position.y < 75){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(69, 75, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 80){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(65, 80, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 84){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(71, 84, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 88){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(67, 88, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 88){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(67, 88, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 106){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(69, 106, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
+				else if(Player.S.transform.position.y < 112){
+					Opponent.S.opponent_pokeball.Add(new Pokeball_Info(68, 112, Opponent.S.opponent_pokemon_list[0]));
+					Opponent.S.opponent_pokemon_list[0] = PokemonObject.getPokemon ("None");
+				}
 				break;
 			case 4:
 				//place obstacle
