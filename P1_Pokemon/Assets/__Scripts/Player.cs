@@ -145,7 +145,7 @@ public class Player : MonoBehaviour {
 				moveVec = Vector3.zero;
 				moving = false;
 			}
-			if (S.pos.x == 68 && S.pos.y == 113){
+			if ((S.pos.x == 68 && S.pos.y == 113) || (S.pos.x == 69 && S.pos.y == 114)){
 				allowedToMove = false;
 				CheckForAction();
 				print("you win");

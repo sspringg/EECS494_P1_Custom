@@ -9,7 +9,7 @@ public class Winning_Star : MonoBehaviour {
 		S = this;
 	}
 	void OnTriggerEnter(Collider coll){
-//			star_reached = false;
 			Player.S.CheckForAction();
+			Player.S.allowedToMove = false;
 	}
 }

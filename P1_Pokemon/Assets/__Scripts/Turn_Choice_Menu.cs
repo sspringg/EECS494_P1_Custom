@@ -79,9 +79,12 @@ public class Turn_Choice_Menu : MonoBehaviour {
 					break;
 				case(int)Turn_Choices.Battle:
 					Main.S.choiceMade = 3;
-					if(checkDistance((int)Player.S.transform.position.x, (int)Player.S.transform.position.y)){
-						Opponent.S.moveTowardPlayer = true;
+					if(Player.S.transform.position.y > Opponent.S.transform.position.y && Math.Abs(Player.S.transform.position.x - Opponent.S.transform.position.x) < 5){
+//						Opponent.S.transform.position =  new Vector3(Player.S.transform.position.x, Player.S.transform.position.y - 1, Player.S.transform.position.z);
+						Player.S.inScene0 = false;
 						gameObject.SetActive(false);
+						Player.S.enemyNo = 4;
+						Application.LoadLevelAdditive("_Scene_2");
 					}
 					else{
 						Dialog.S.gameObject.SetActive(true);

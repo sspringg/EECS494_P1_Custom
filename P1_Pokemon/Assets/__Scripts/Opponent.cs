@@ -169,7 +169,7 @@ public class Opponent : MonoBehaviour {
 			   (transform.position.x >= 64 && transform.position.x <= 67 && transform.position.y >= 78 && transform.position.x <= 79) ||
 			   (transform.position.x >= 70 && transform.position.x <= 73 && transform.position.y >= 82 && transform.position.x <= 85) || 
 			   (transform.position.x >= 72 && transform.position.x <= 75 && transform.position.y >= 92 && transform.position.x <= 95) ||
-			   (transform.position.x >= 68 && transform.position.x <= 75 && transform.position.y >= 98 && transform.position.x <= 101)){
+			   (transform.position.x >= 68 && transform.position.x <= 75 && transform.position.y >= 98 && transform.position.x <= 101) && !Main.S.playerTurn){
 				randomVal = UnityEngine.Random.Range(0, 400);
 			   	if(randomVal < 2){
 					Dialog.S.gameObject.SetActive(true);
