@@ -515,12 +515,8 @@ public class PokemonObject{
 			}
 			if (i == 6) {
 				TurnActionViewer.S.allDied = true;
-				Vector3 pos;
-				pos.x = 21;
-				pos.y = 52;
-				pos.z = -0.01f;
 				Player.S.inScene0 = true;
-				Player.S.MoveThroughDoor (pos);
+				Player.S.MoveThroughDoor(Player.S.cur_checkpoint);
 				for (int j = 0; j < 6; ++j) {
 					Player.S.pokemon_list [j].curHp = Player.S.pokemon_list [j].totHp;
 					Player.S.pokemon_list [j].move1.curPp = Player.S.pokemon_list [j].move1.totPp;

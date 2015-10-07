@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class TurnActionViewer : MonoBehaviour {
-
+	
 	public static TurnActionViewer S;
 	public string[] endText;
 	public string printText;
@@ -12,11 +12,12 @@ public class TurnActionViewer : MonoBehaviour {
 	public bool run;
 	public bool pokecaught;
 	public double diffmod;
-
+	public int i;
+	
 	void Awake () {
 		S = this;
 	}
-
+	
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
@@ -38,41 +39,55 @@ public class TurnActionViewer : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A)) {
 			gameObject.SetActive (false);
 			if (BattleScreen.opponentPokemon.curHp <= 0) {
-				if (activeDied != "") endText[lim++] = activeDied + " has fainted.";
-				int x, y;
-				printText = "";
-				endText[lim++] = BattleScreen.opponentPokemon.pkmnName + " has fainted.";
-				for (int i = 0; i < 6; ++i) {
-					if (Player.S.pokemon_list [i].curHp > 0 && Player.S.pokemon_list [i].fought) {
-						y = 31 * BattleScreen.opponentPokemon.level;
-						Player.S.pokemon_list [i].exp += y;
-						endText[lim++] = Player.S.pokemon_list [i].pkmnName + " has gained " + y + " exp.";
-						x = Player.S.pokemon_list [i].level + 1;
-						Player.S.pokemon_list [i].fought = false;
-						if (Player.S.pokemon_list [i].exp > x * x * x) {
-							++Player.S.pokemon_list [i].level;
-							Player.S.pokemon_list [i].totHp += 5;
-							Player.S.pokemon_list [i].curHp += 5;
-							Player.S.pokemon_list [i].atk += 5;
-							Player.S.pokemon_list [i].def += 5;
-							Player.S.pokemon_list [i].spAtk += 5;
-							Player.S.pokemon_list [i].spDef += 5;
-							Player.S.pokemon_list [i].speed += 5;
-							printText += Player.S.pokemon_list [i].pkmnName + ", ";
+				if (Player.S.enemyNo == 4){
+					for (i = 0; i < 6; ++i) {
+						if (Opponent.S.opponent_pokemon_list [i].curHp > 0) {
+							BattleScreen.updatePokemon (false, Opponent.S.opponent_pokemon_list [i]);
+							break;
 						}
 					}
 				}
-				endText[lim++] = "Player has gained 500 Pokemon money.";
-				Player.S.money += 500;
-				AttackMenu.S.gameObject.SetActive (false);
-				AttackMoveView.S.gameObject.SetActive (false);
-				EndTextViewer.S.gameObject.SetActive(true);
+				if (BattleScreen.opponentPokemon.curHp == 0){
+					if (activeDied != "") endText[lim++] = activeDied + " has fainted.";
+					int x, y;
+					printText = "";
+					endText[lim++] = BattleScreen.opponentPokemon.pkmnName + " has fainted.";
+					for (int i = 0; i < 6; ++i) {
+						if (Player.S.pokemon_list [i].curHp > 0 && Player.S.pokemon_list [i].fought) {
+							y = 31 * BattleScreen.opponentPokemon.level;
+							Player.S.pokemon_list [i].exp += y;
+							endText[lim++] = Player.S.pokemon_list [i].pkmnName + " has gained " + y + " exp.";
+							x = Player.S.pokemon_list [i].level + 1;
+							Player.S.pokemon_list [i].fought = false;
+							if (Player.S.pokemon_list [i].exp > x * x * x) {
+								++Player.S.pokemon_list [i].level;
+								Player.S.pokemon_list [i].totHp += 5;
+								Player.S.pokemon_list [i].curHp += 5;
+								Player.S.pokemon_list [i].atk += 5;
+								Player.S.pokemon_list [i].def += 5;
+								Player.S.pokemon_list [i].spAtk += 5;
+								Player.S.pokemon_list [i].spDef += 5;
+								Player.S.pokemon_list [i].speed += 5;
+								printText += Player.S.pokemon_list [i].pkmnName + ", ";
+							}
+						}
+					}
+					endText[lim++] = "Player has gained 500 Pokemon money.";
+					Player.S.money += 500;
+					AttackMenu.S.gameObject.SetActive (false);
+					AttackMoveView.S.gameObject.SetActive (false);
+					EndTextViewer.S.gameObject.SetActive(true);
+					Opponent.checkpoint();
+				}
+				else {
+					BottomMenu.S.gameObject.SetActive(true);
+				}
 			}
 			else if (allDied){
 				AttackMenu.S.gameObject.SetActive (false);
 				AttackMoveView.S.gameObject.SetActive (false);
 				FaintedViewer.S.gameObject.SetActive(true);
-				FaintedViewer.printMessage("All your Pokemon have fainted,\nyou will be transfered to the \nnearest Pokemon center.");
+				FaintedViewer.printMessage("All your Pokemon have fainted,\nyou will be transfered to the \nlast checkpoint.");
 			}
 			else if (activeDied != ""){
 				AttackMenu.S.gameObject.SetActive (false);
@@ -118,7 +133,7 @@ public class TurnActionViewer : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	public static void printMessage(string inMsg){
 		GUIText myText;
 		

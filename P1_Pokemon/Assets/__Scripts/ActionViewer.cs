@@ -24,8 +24,8 @@ public class ActionViewer : MonoBehaviour {
 				}
 				break;
 			case 2:
-				//Player.S.inScene0 = false;
-				//Application.LoadLevelAdditive("_Scene_2");
+				Player.S.inScene0 = false;
+				Application.LoadLevelAdditive("_Scene_2");
 				Player.S.enemyNo = 4;
 				break;
 			case 3:
@@ -35,15 +35,18 @@ public class ActionViewer : MonoBehaviour {
 				//place obstacle
 				break;
 			}
-			if (Opponent.S.cur_action > 1){
+			if (Opponent.S.cur_action > 1 && Player.S.inScene0){
 				gameObject.SetActive(false);
 				Opponent.S.action_selected = false;
 				Turn_Choice_Menu.S.gameObject.SetActive(true);
 				Main.S.playerTurn = true;
 			}
-			else{
+			else if (Player.S.inScene0){
 				gameObject.SetActive(false);
-				Opponent.S.action_selected = false;
+				Opponent.S.action_selected = false;	
+			}
+			else {
+				gameObject.SetActive(false);
 			}
 		}
 	}

@@ -30,7 +30,12 @@ public class BattleScreen : MonoBehaviour {
 			updatePokemon (false, Player.S.YS_pkmn);
 			break;
 		case 4:
-			updatePokemon (false, Opponent.S.opponent_pokemon_list[0]);
+			for (int i = 0; i < 6; ++i) {
+				if (Opponent.S.opponent_pokemon_list [i].curHp > 0) {
+					BattleScreen.updatePokemon (false, Opponent.S.opponent_pokemon_list [i]);
+					break;
+				}
+			}
 			break;
 		case 5:
 			updatePokemon (false, PokemonObject.getPokemon ("Caterpie"));
@@ -83,5 +88,8 @@ public class BattleScreen : MonoBehaviour {
 		Player.S.inScene0 = true;
 		Destroy (GameObject.Find ("BattleScene"));
 		Player.S.enemyNo = 0;
+		Turn_Choice_Menu.S.gameObject.SetActive(true);
+		Main.S.playerTurn = true;
+		Opponent.S.action_selected = false;
 	}
 }

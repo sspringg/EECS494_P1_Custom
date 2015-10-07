@@ -59,6 +59,7 @@ public class Player : MonoBehaviour {
 	public Vector3	targetPos;
 	public Direction direction;
 	public Vector3	moveVec;
+	public Vector3 cur_checkpoint;
 	
 	public Dictionary<string, int> speakDictionary = new Dictionary<string, int>();
 	public Dictionary<string, int> itemsDictionary = new Dictionary<string,int>();
@@ -94,6 +95,10 @@ public class Player : MonoBehaviour {
 		wildPkmn2 = PokemonObject.getPokemon ("Caterpie");
 		itemsDictionary ["POKeBALL"] = 2;
 		itemsDictionary["POTION"] = 2;
+
+		cur_checkpoint.x = 68;
+		cur_checkpoint.y = 69;
+		cur_checkpoint.z = -0.01f;
 	}
 	
 	new public Rigidbody rigidbody{

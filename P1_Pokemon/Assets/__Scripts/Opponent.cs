@@ -18,6 +18,7 @@ public class Opponent : MonoBehaviour {
 	public int cur_action = 0;
 	public bool action_selected = false;
 	public bool continue_moving = false;
+	public Vector3 cur_checkpoint;
 	public Vector3	opponent_targetPos;
 	public Vector3	opponent_moveVec;
 	public Vector3 opponent_pos{
@@ -40,14 +41,20 @@ public class Opponent : MonoBehaviour {
 	void Start () {	
 		sprend = gameObject.GetComponent<SpriteRenderer>();
 		sprend.sprite = upSprite;
-		opponent_pokemon_list.Add(PokemonObject.getPokemon ("Squirtle"));
-		opponent_pokemon_list [0].totHp = 50;
-		opponent_pokemon_list [0].curHp = 50;
-		opponent_pokemon_list [0].atk = 52;
-		opponent_pokemon_list [0].level = 6;
-		opponent_pokemon_list.Add(PokemonObject.getPokemon ("Caterpie"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list.Add (PokemonObject.getPokemon ("None"));
+		opponent_pokemon_list[0] = PokemonObject.getPokemon ("Squirtle");
+		opponent_pokemon_list[1] = PokemonObject.getPokemon ("Caterpie");
 		opponent_itemsDictionary.Add("POTION",1);
 		opponent_itemsDictionary.Add("POKeBALL",2);
+
+		cur_checkpoint.x = 68;
+		cur_checkpoint.y = 69;
+		cur_checkpoint.z = -0.01f;
 
 		dir_list.Add (Vector3.left);
 		for (int i = 0; i < 8; ++i)
@@ -229,5 +236,22 @@ public class Opponent : MonoBehaviour {
 			//stop game
 			S.gameObject.SetActive (false);
 		}
+	}
+
+	public static void checkpoint(){
+		Player.S.inScene0 = true;
+		S.opponent_moving = false;
+		S.continue_moving = false;
+		S.opponent_moveVec = Vector3.zero;
+		S.transform.position = S.cur_checkpoint;
+		for (int j = 0; j < 6; ++j) {
+			Opponent.S.opponent_pokemon_list [j].curHp = Opponent.S.opponent_pokemon_list [j].totHp;
+			Opponent.S.opponent_pokemon_list [j].move1.curPp = Opponent.S.opponent_pokemon_list [j].move1.totPp;
+			Opponent.S.opponent_pokemon_list [j].move2.curPp = Opponent.S.opponent_pokemon_list [j].move2.totPp;
+			Opponent.S.opponent_pokemon_list [j].move3.curPp = Opponent.S.opponent_pokemon_list [j].move3.totPp;
+			Opponent.S.opponent_pokemon_list [j].move4.curPp = Opponent.S.opponent_pokemon_list [j].move4.totPp;
+			Opponent.S.opponent_pokemon_list [j].stat = pkmnStatus.OK;
+		}
+		S.dir_pos = 1;
 	}
 }
