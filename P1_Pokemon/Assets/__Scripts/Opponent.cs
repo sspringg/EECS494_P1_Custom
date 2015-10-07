@@ -158,7 +158,7 @@ public class Opponent : MonoBehaviour {
 					}
 					Main.S.player_pokeball.RemoveAt(i);
 					if(!alivePokemon)
-						checkpoint();
+						Opponent.checkpoint();
 					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;
 					spacesMoved = 1;
@@ -220,7 +220,7 @@ public class Opponent : MonoBehaviour {
 						}
 					}
 					if(!alivePokemon){
-						checkpoint();
+						Opponent.checkpoint();
 					}
 					Turn_Choice_Menu.S.gameObject.SetActive(true);
 					Main.S.playerTurn = true;
