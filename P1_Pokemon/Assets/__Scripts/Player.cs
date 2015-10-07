@@ -138,6 +138,10 @@ public class Player : MonoBehaviour {
 				moveVec = Vector3.zero;
 				moving = false;
 			}
+			if ((S.pos.x == 68 || S.pos.x == 69) && S.pos.y >= 114){
+				print ("You Win!");
+				Opponent.S.gameObject.SetActive(false);
+			}
 			//////////////////////////////////////
 			//minute 25
 			//ray cast sends out a ray in any direction for however long 

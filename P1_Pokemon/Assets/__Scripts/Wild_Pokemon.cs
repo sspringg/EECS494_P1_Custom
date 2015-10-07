@@ -12,7 +12,7 @@ public class Wild_Pokemon : MonoBehaviour {
 		if (randomVal < chanceToFight) {
 			Player.S.inScene0 = false;
 			Application.LoadLevelAdditive ("_Scene_2");
-			Player.S.enemyNo = UnityEngine.Random.Range(4, 6);
+			Player.S.enemyNo = UnityEngine.Random.Range(5, 7);
 		}
 	}
 	void FixedUpdate(){

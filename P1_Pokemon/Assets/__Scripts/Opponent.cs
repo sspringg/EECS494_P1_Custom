@@ -13,8 +13,10 @@ public class Opponent : MonoBehaviour {
 	public	Sprite	rightSprite;
 	public bool moveTowardPlayer = false, opponent_moving = false;
 	public SpriteRenderer	sprend;
-	private int randomVal, spacesMoved = 0;
+	public int randomVal, spacesMoved = 0;
 	public int	moveSpeed = 4;
+	public int cur_action = 0;
+	public bool action_selected = false;
 	public Vector3	opponent_targetPos;
 	public Vector3	opponent_moveVec;
 	public Vector3 opponent_pos{
@@ -25,6 +27,8 @@ public class Opponent : MonoBehaviour {
 	
 	public List<Pokeball_Info> opponent_pokeball = new List<Pokeball_Info>();
 	public List<PokemonObject> opponent_pokemon_list = new List<PokemonObject>();
+	public List<Vector3> dir_list = new List<Vector3>();
+	public int dir_pos = 0;
 	public Dictionary<string, int> opponent_itemsDictionary = new Dictionary<string,int>();
 	// Use this for initialization
 	public UnityEngine.Random random = new UnityEngine.Random();
@@ -36,39 +40,74 @@ public class Opponent : MonoBehaviour {
 		sprend = gameObject.GetComponent<SpriteRenderer>();
 		sprend.sprite = upSprite;
 		opponent_pokemon_list.Add(PokemonObject.getPokemon ("Squirtle"));
+		opponent_pokemon_list [0].totHp = 50;
+		opponent_pokemon_list [0].curHp = 50;
+		opponent_pokemon_list [0].atk = 52;
+		opponent_pokemon_list [0].level = 6;
 		opponent_pokemon_list.Add(PokemonObject.getPokemon ("Caterpie"));
 		opponent_itemsDictionary.Add("POTION",1);
 		opponent_itemsDictionary.Add("POKeBALL",2);
+
+		dir_list.Add (Vector3.left);
+		for (int i = 0; i < 8; ++i)
+			dir_list.Add (Vector3.up);
+		for (int i = 0; i < 2; ++i)
+			dir_list.Add (Vector3.left);
+		for (int i = 0; i < 5; ++i)
+			dir_list.Add (Vector3.up);
+		for (int i = 0; i < 4; ++i)
+			dir_list.Add (Vector3.right);
+		for (int i = 0; i < 4; ++i)
+			dir_list.Add (Vector3.up);
+		for (int i = 0; i < 3; ++i)
+			dir_list.Add (Vector3.left);
+		for (int i = 0; i < 4; ++i)
+			dir_list.Add (Vector3.up);
+		for (int i = 0; i < 5; ++i)
+			dir_list.Add (Vector3.right);
+		for (int i = 0; i < 14; ++i)
+			dir_list.Add (Vector3.up);
+		for (int i = 0; i < 3; ++i)
+			dir_list.Add (Vector3.left);
+		for (int i = 0; i < 10; ++i)
+			dir_list.Add (Vector3.up);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(spacesMoved != 0 && !opponent_moving)
-			moveOpponentForward();		//keep moving until moved all spaces
-			/*put game logic here. Right now I just have a basic switch statement that is always 1 to test the control of the game
-			but change the structure however you like. Also it would be nice to display the opponents choice before he does anything"*/
-		else if(!Main.S.playerTurn && !opponent_moving){
-			print("! player turn");
-			randomVal = UnityEngine.Random.Range(1, 4);
-			randomVal = 1; //for testing
-			switch(randomVal){
-			case 1:		//oppponent	move
-				randomVal = UnityEngine.Random.Range(1, 10);
-				print("raval: " + randomVal);
+		if (spacesMoved != 0 && !opponent_moving)
+			moveOpponentForward ();		//keep moving until moved all spaces
+		else if (!Main.S.playerTurn && !opponent_moving) {
+			cur_action = 0;
+			print ("! player turn");
+			if (S.opponent_pos.y < Player.S.pos.y) {
+				randomVal = UnityEngine.Random.Range (1, 10);
+				print ("raval: " + randomVal);
 				spacesMoved = randomVal;
-				moveOpponentForward();
-				break;
-			case 2:		//place pokemon
-				print("place pokemon");
-				
-				break;
-			case 3:		//use item
-				print("use item");
-				break;
-			case 4:		//Battle
-				print("battle");
-				break;
-			}	
+				cur_action = 1;
+				ActionViewer.S.gameObject.SetActive(true);
+				ActionViewer.printMessage("Opponent chose to move");
+			} else {
+				if (!action_selected){
+					randomVal = UnityEngine.Random.Range (0, 2);
+					action_selected = true;
+				}
+				if (S.opponent_pos.y - Player.S.pos.y <= 4 && Mathf.Abs(S.opponent_pos.x - Player.S.pos.x) <= 4){
+					cur_action = 2;
+					ActionViewer.S.gameObject.SetActive(true);
+					ActionViewer.printMessage("Opponent chose to battle");
+				}
+				else if(randomVal == 0){
+					cur_action = 3;
+					ActionViewer.S.gameObject.SetActive(true);
+					ActionViewer.printMessage("Opponent chose to place trap");
+				}
+				else{
+					cur_action = 4;
+					ActionViewer.S.gameObject.SetActive(true);
+					ActionViewer.printMessage("Opponent chose to place obstacle");
+				}
+			}
 		}
 		else if(opponent_moving){
 			//opponent is moving
@@ -142,26 +181,53 @@ public class Opponent : MonoBehaviour {
 		opponent_targetPos = opponent_pos + opponent_moveVec;
 	}
 	public void moveOpponentForward(){
-		if(!Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+		if (dir_list [dir_pos] == Vector3.left) {
 			opponent_moveVec = Vector3.left;
 			sprend.sprite = leftSprite;
 			opponent_moving = true;
 		}
-		else if(!Physics.Raycast(gameObject.transform.position, Vector3.right, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+		else if (dir_list [dir_pos] == Vector3.right) {
 			opponent_moveVec = Vector3.right;
 			sprend.sprite = rightSprite;
 			opponent_moving = true;
 		}
-		else if(!Physics.Raycast(gameObject.transform.position, Vector3.up, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+		else if (dir_list [dir_pos] == Vector3.up) {
 			opponent_moveVec = Vector3.up;
 			sprend.sprite = upSprite;
 			opponent_moving = true;
 		}
-		else if(!Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+		else if (dir_list [dir_pos] == Vector3.down) {
 			opponent_moveVec = Vector3.down;
 			sprend.sprite = downSprite;
 			opponent_moving = true;
 		}
+		/*
+		if(dir_list[dir_pos] == Vector3.left && !Physics.Raycast(gameObject.transform.position, Vector3.left, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.left;
+			sprend.sprite = leftSprite;
+			opponent_moving = true;
+		}
+		else if(dir_list[dir_pos] == Vector3.right && !Physics.Raycast(gameObject.transform.position, Vector3.right, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.right;
+			sprend.sprite = rightSprite;
+			opponent_moving = true;
+		}
+		else if(dir_list[dir_pos] == Vector3.up && !Physics.Raycast(gameObject.transform.position, Vector3.up, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.up;
+			sprend.sprite = upSprite;
+			opponent_moving = true;
+		}
+		else if(dir_list[dir_pos] == Vector3.down && !Physics.Raycast(gameObject.transform.position, Vector3.down, out hitInfo, 1f, Player.S.GetLayerMask(new string[] {"Immovable", "NPC","Ledge", "Player"}))){
+			opponent_moveVec = Vector3.down;
+			sprend.sprite = downSprite;
+			opponent_moving = true;
+		}*/
 		opponent_targetPos = opponent_pos + opponent_moveVec;
+		++dir_pos;
+		if (dir_pos >= dir_list.Count) {
+			print ("Opponent Wins");
+			//stop game
+			S.gameObject.SetActive (false);
+		}
 	}
 }
