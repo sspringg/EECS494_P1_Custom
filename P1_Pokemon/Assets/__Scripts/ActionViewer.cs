@@ -18,7 +18,10 @@ public class ActionViewer : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A)) {
 			switch(Opponent.S.cur_action){
 			case 1:
-				Opponent.S.moveOpponentForward();
+				if (!Opponent.S.opponent_moving){
+					Opponent.S.moveOpponentForward();
+					Opponent.S.continue_moving = true;
+				}
 				break;
 			case 2:
 				//Player.S.inScene0 = false;
@@ -32,8 +35,16 @@ public class ActionViewer : MonoBehaviour {
 				//place obstacle
 				break;
 			}
-			gameObject.SetActive(false);
-			Opponent.S.action_selected = false;
+			if (Opponent.S.cur_action > 1){
+				gameObject.SetActive(false);
+				Opponent.S.action_selected = false;
+				Turn_Choice_Menu.S.gameObject.SetActive(true);
+				Main.S.playerTurn = true;
+			}
+			else{
+				gameObject.SetActive(false);
+				Opponent.S.action_selected = false;
+			}
 		}
 	}
 

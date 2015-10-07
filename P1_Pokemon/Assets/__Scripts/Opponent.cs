@@ -17,6 +17,7 @@ public class Opponent : MonoBehaviour {
 	public int	moveSpeed = 4;
 	public int cur_action = 0;
 	public bool action_selected = false;
+	public bool continue_moving = false;
 	public Vector3	opponent_targetPos;
 	public Vector3	opponent_moveVec;
 	public Vector3 opponent_pos{
@@ -75,9 +76,10 @@ public class Opponent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (spacesMoved != 0 && !opponent_moving)
+		if (spacesMoved != 0 && !opponent_moving && continue_moving)
 			moveOpponentForward ();		//keep moving until moved all spaces
-		else if (!Main.S.playerTurn && !opponent_moving) {
+		else if (!Main.S.playerTurn && !opponent_moving && !action_selected) {
+			action_selected = true;
 			cur_action = 0;
 			print ("! player turn");
 			if (S.opponent_pos.y < Player.S.pos.y) {
@@ -87,11 +89,9 @@ public class Opponent : MonoBehaviour {
 				cur_action = 1;
 				ActionViewer.S.gameObject.SetActive(true);
 				ActionViewer.printMessage("Opponent chose to move");
+				continue_moving = false;
 			} else {
-				if (!action_selected){
-					randomVal = UnityEngine.Random.Range (0, 2);
-					action_selected = true;
-				}
+				randomVal = UnityEngine.Random.Range (0, 2);
 				if (S.opponent_pos.y - Player.S.pos.y <= 4 && Mathf.Abs(S.opponent_pos.x - Player.S.pos.x) <= 4){
 					cur_action = 2;
 					ActionViewer.S.gameObject.SetActive(true);
