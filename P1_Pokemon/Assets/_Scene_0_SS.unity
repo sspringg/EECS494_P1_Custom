@@ -380,6 +380,7 @@ MonoBehaviour:
   targetPos: {x: 0, y: 0, z: 0}
   direction: 0
   moveVec: {x: 0, y: 0, z: 0}
+  cur_checkpoint: {x: 0, y: 0, z: 0}
 --- !u!4 &6287982
 Transform:
   m_ObjectHideFlags: 0
@@ -26113,6 +26114,7 @@ MonoBehaviour:
   cur_action: 0
   action_selected: 0
   continue_moving: 0
+  cur_checkpoint: {x: 0, y: 0, z: 0}
   opponent_targetPos: {x: 0, y: 0, z: 0}
   opponent_moveVec: {x: 0, y: 0, z: 0}
   dir_list: []
